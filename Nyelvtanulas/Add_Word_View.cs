@@ -1,5 +1,4 @@
-﻿using Nyelvtanulas.Documents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,18 +10,11 @@ using System.Windows.Forms;
 
 namespace Nyelvtanulas
 {
-    public partial class Nyelvtanulas : Form
+    public partial class Add_Word_View : Form
     {
-        public readonly WordData Data;
-        public Nyelvtanulas()
+        public Add_Word_View()
         {
-            Data = new WordData();
             InitializeComponent();
-        }
-
-        private void Add_Word_btn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
