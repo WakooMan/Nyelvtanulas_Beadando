@@ -1,6 +1,7 @@
 ﻿using Nyelvtanulas.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nyelvtanulas.Languages
 {
@@ -9,13 +10,14 @@ namespace Nyelvtanulas.Languages
         public string Text { get; private set; }
         public Language Language { get; private set; }
         private List<Word> OnOtherLanguages;
+        private List<Word> _synonyms;
         public Word(Language language, string txt)
         {
             Text = txt;
             Language = language;
             OnOtherLanguages = new List<Word>();
+            _synonyms = new List<Word>();
         }
-
         public void AddOtherLanguageWord(Word word)
         {
             if (!Language.IsThisLanguage(word.Language))
@@ -25,6 +27,23 @@ namespace Nyelvtanulas.Languages
             else
             {
                 throw new AddingSameLanguageWordException();
+            }
+        }
+
+        public bool IsSynonymOf(Word value)
+        {
+            return _synonyms.Any(Value => value == Value);
+        }
+
+        public void AddSynonymWord(Word word)
+        {
+            if (Language.IsThisLanguage(word.Language))
+            {
+                _synonyms.Add(word);
+            }
+            else
+            {
+                throw new AddingOtherLanguageSynonymException();
             }
         }
 

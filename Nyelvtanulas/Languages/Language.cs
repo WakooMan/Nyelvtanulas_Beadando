@@ -26,6 +26,7 @@ namespace Nyelvtanulas.Languages
         { 
             List<Word> result = new List<Word>();
             List<Word> ValidWords = _words.Where(value => value.HasLanguage(OtherLanguage)&&(Exceptions is null || !Exceptions.Contains(value))).ToList();
+            ValidWords = ValidWords.Where(value => ValidWords.All(Value => value==Value || !value.IsSynonymOf(Value))).ToList();
             if (ValidWords.Count < 5)
             {
                 throw new NotEnoughWordException();
