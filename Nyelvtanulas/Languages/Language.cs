@@ -9,12 +9,12 @@ namespace Nyelvtanulas.Languages
 {
     public abstract class Language
     {
-        private List<Word> Words;
+        private List<Word> _words;
         public abstract string Name();
 
         protected Language()
         {
-            Words = new List<Word>();
+            _words = new List<Word>();
         }
 
         public bool IsThisLanguage(Language OtherLanguage)
@@ -22,10 +22,10 @@ namespace Nyelvtanulas.Languages
             return Name() == OtherLanguage.Name();
         }
 
-        public Dictionary<Word, Word> PickRandomWords(Language OtherLanguage)
+        public List<Word> PickRandomWords(Language OtherLanguage,List<Word>? Exceptions)
         { 
-            Dictionary<Word,Word> result = new Dictionary<Word,Word>();
-            List<Word> ValidWords = Words.Where(value => value.HasLanguage(OtherLanguage)).ToList();
+            List<Word> result = new List<Word>();
+            List<Word> ValidWords = _words.Where(value => value.HasLanguage(OtherLanguage)&&(Exceptions is null || !Exceptions.Contains(value))).ToList();
             if (ValidWords.Count < 5)
             {
                 throw new NotEnoughWordException();
@@ -35,22 +35,24 @@ namespace Nyelvtanulas.Languages
             {
                 Word temp = ValidWords[rnd.Next(0, ValidWords.Count - 1)];
                 ValidWords.Remove(temp);
-                result.Add(temp,temp.GetWord(OtherLanguage));
+                result.Add(temp);
             }
             return result;
         }
 
         public void AddWord(Word word)
         {
-            if (Words.Find(value => value.Text == word.Text) == null)
+            if (_words.Find(value => value.Text == word.Text) == null)
             {
-                Words.Add(word);
+                _words.Add(word);
             }
             else
             {
                 throw new WordAlreadyAddedException();
             }
         }
+
+        public IEnumerable<Word> Words => _words.AsEnumerable();
 
     }
 }

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Nyelvtanulas/1.0.0": {
+        "runtime": {
+          "Nyelvtanulas.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Nyelvtanulas/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

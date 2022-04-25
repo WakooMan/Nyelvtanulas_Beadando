@@ -40,12 +40,12 @@ namespace Nyelvtanulas.Languages
             return false;
         }
 
-        public Word GetWord(Language OtherLanguage)
+        public List<Word> GetWords(Language OtherLanguage)
         {
-            Word? w = OnOtherLanguages.Find(value => value.Language.IsThisLanguage(OtherLanguage));
-            if (w is not null)
+            List<Word> words = OnOtherLanguages.FindAll(value => value.Language.IsThisLanguage(OtherLanguage));
+            if (words.Count>0)
             {
-                return w;
+                return words;
             }
             else
             {
