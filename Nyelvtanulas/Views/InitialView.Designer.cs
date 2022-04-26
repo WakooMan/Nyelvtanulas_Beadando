@@ -1,4 +1,6 @@
-﻿namespace Nyelvtanulas.Views
+﻿using Nyelvtanulas.Languages;
+
+namespace Nyelvtanulas.Views
 {
     partial class InitialView
     {
@@ -90,6 +92,9 @@
             this.Language2_ComboBox.Name = "Language2_ComboBox";
             this.Language2_ComboBox.Size = new System.Drawing.Size(182, 33);
             this.Language2_ComboBox.TabIndex = 6;
+            this.Language2_ComboBox.Items.Add(Hungarian.Current().Name());
+            this.Language2_ComboBox.Items.Add(English.Current().Name());
+            this.Language2_ComboBox.SelectedIndex = 1;
             // 
             // Language1_ComboBox
             // 
@@ -98,6 +103,9 @@
             this.Language1_ComboBox.Name = "Language1_ComboBox";
             this.Language1_ComboBox.Size = new System.Drawing.Size(182, 33);
             this.Language1_ComboBox.TabIndex = 7;
+            this.Language1_ComboBox.Items.Add(Hungarian.Current().Name());
+            this.Language1_ComboBox.Items.Add(English.Current().Name());
+            this.Language1_ComboBox.SelectedIndex = 0;
             // 
             // InitialView
             // 
@@ -111,7 +119,7 @@
             this.Controls.Add(this.Check_Knowledge_Button);
             this.Controls.Add(this.Add_Translation_Button);
             this.Name = "InitialView";
-            this.Size = new System.Drawing.Size(929, 461);
+            this.Size = new System.Drawing.Size(939, 457);
             this.ResumeLayout(false);
             this.PerformLayout();
 

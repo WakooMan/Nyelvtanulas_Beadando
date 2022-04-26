@@ -32,7 +32,6 @@ namespace Nyelvtanulas.Views
         {
 
             Add_Word_View View = new Add_Word_View(this.SetCurrentView,this.Language1_ComboBox.Text,this.Language2_ComboBox.Text);
-            View.Name = "Add_Word_View";
             SetCurrentView(View);
         }
     }

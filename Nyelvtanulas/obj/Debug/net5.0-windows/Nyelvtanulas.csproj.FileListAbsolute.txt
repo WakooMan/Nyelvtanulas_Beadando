@@ -23,8 +23,6 @@ D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\Nyelvtanulas.runtimeco
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\Nyelvtanulas.dll
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\Nyelvtanulas.pdb
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.csproj.AssemblyReference.cache
-D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Add_Word_View.resources
-D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Nyelvtanulas.resources
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.csproj.GenerateResource.cache
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.GeneratedMSBuildEditorConfig.editorconfig
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.AssemblyInfoInputs.cache

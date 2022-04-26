@@ -20,10 +20,8 @@ namespace Nyelvtanulas
 
         private void SetCurrentView(UserControl control)
         {
-            this.Controls.Remove(this.CurrentView);
             control.Dock = System.Windows.Forms.DockStyle.Fill;
             control.Location = new System.Drawing.Point(0, 0);
-            control.Size = new System.Drawing.Size(939, 457);
             control.TabIndex = 0;
             this.CurrentView = control;
         }
