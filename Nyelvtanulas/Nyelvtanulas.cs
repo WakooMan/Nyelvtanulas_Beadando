@@ -11,18 +11,21 @@ using System.Windows.Forms;
 
 namespace Nyelvtanulas
 {
-    public partial class Nyelvtanulas : Form
+    public partial class NyelvtanulasForm : Form
     {
-        public readonly WordData Data;
-        public Nyelvtanulas()
+        public NyelvtanulasForm()
         {
-            Data = new WordData();
             InitializeComponent();
         }
 
-        private void Add_Word_btn_Click(object sender, EventArgs e)
+        private void SetCurrentView(UserControl control)
         {
-
+            this.Controls.Remove(this.CurrentView);
+            control.Dock = System.Windows.Forms.DockStyle.Fill;
+            control.Location = new System.Drawing.Point(0, 0);
+            control.Size = new System.Drawing.Size(939, 457);
+            control.TabIndex = 0;
+            this.CurrentView = control;
         }
     }
 }

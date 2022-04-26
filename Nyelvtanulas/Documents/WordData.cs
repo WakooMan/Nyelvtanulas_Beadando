@@ -7,16 +7,26 @@ namespace Nyelvtanulas.Documents
     public class WordData : Document
     {
         private Dictionary<string, Language> Languages;
-        private List<Word> _allWords;
-        public WordData()
+        private List<Translation> _allWords;
+
+        private static WordData? current= null;
+        public static WordData Current()
+        {
+            if (current is null)
+            {
+                current = new WordData();
+            }
+            return current;
+        }
+        private WordData()
         {
             Languages = new Dictionary<string, Language>();
             Languages.Add(Hungarian.Current().Name(), Hungarian.Current());
             Languages.Add(English.Current().Name(), English.Current());
-            _allWords = new List<Word>();
+            _allWords = new List<Translation>();
             foreach (Language lg in Languages.Values)
             {
-                foreach (Word word in lg.Words)
+                foreach (Translation word in lg.Words)
                 {
                     _allWords.Add(word);
                 }
@@ -35,7 +45,7 @@ namespace Nyelvtanulas.Documents
             }
         }
 
-        public IEnumerable<Word> GetLanguageWords(string Name)
+        public IEnumerable<Translation> GetLanguageWords(string Name)
         {
             try
             {
@@ -47,7 +57,7 @@ namespace Nyelvtanulas.Documents
             }
         }
 
-        public IEnumerable<Word> AllWords()
+        public IEnumerable<Translation> AllWords()
         {
             return _allWords.AsEnumerable();
         }

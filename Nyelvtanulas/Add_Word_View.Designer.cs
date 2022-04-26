@@ -45,6 +45,7 @@
             this.Add_Word_btn2.TabIndex = 0;
             this.Add_Word_btn2.Text = "ADD WORD";
             this.Add_Word_btn2.UseVisualStyleBackColor = true;
+            this.Add_Word_btn2.Click += new System.EventHandler(this.Add_Word_btn2_Click);
             // 
             // Add_Synonym_btn
             // 
@@ -54,6 +55,7 @@
             this.Add_Synonym_btn.TabIndex = 1;
             this.Add_Synonym_btn.Text = "ADD SYNONYM";
             this.Add_Synonym_btn.UseVisualStyleBackColor = true;
+            this.Add_Synonym_btn.Click += new System.EventHandler(this.Add_Synonym_btn_Click);
             // 
             // Add_Word_tb
             // 

@@ -9,12 +9,12 @@ namespace Nyelvtanulas.Languages
 {
     public abstract class Language
     {
-        private List<Word> _words;
+        private List<Translation> _words;
         public abstract string Name();
 
         protected Language()
         {
-            _words = new List<Word>();
+            _words = new List<Translation>();
         }
 
         public bool IsThisLanguage(Language OtherLanguage)
@@ -22,11 +22,10 @@ namespace Nyelvtanulas.Languages
             return Name() == OtherLanguage.Name();
         }
 
-        public List<Word> PickRandomWords(Language OtherLanguage,List<Word>? Exceptions)
+        public List<Translation> PickRandomWords(Language OtherLanguage,List<string>? Exceptions)
         { 
-            List<Word> result = new List<Word>();
-            List<Word> ValidWords = _words.Where(value => value.HasLanguage(OtherLanguage)&&(Exceptions is null || !Exceptions.Contains(value))).ToList();
-            ValidWords = ValidWords.Where(value => ValidWords.All(Value => value==Value || !value.IsSynonymOf(Value))).ToList();
+            List<Translation> result = new List<Translation>();
+            List<Translation> ValidWords = _words.Where(value => value.Language2 == OtherLanguage.Name() && (Exceptions is null || !Exceptions.Contains(value.Word))).ToList();
             if (ValidWords.Count < 5)
             {
                 throw new NotEnoughWordException();
@@ -34,26 +33,22 @@ namespace Nyelvtanulas.Languages
             Random rnd = new Random();
             for (int i = 0; i < 5; i++)
             {
-                Word temp = ValidWords[rnd.Next(0, ValidWords.Count - 1)];
+                Translation temp = ValidWords[rnd.Next(0, ValidWords.Count - 1)];
                 ValidWords.Remove(temp);
                 result.Add(temp);
             }
             return result;
         }
 
-        public void AddWord(Word word)
+        public void AddTranslation(Translation word)
         {
-            if (_words.Find(value => value.Text == word.Text) == null)
+            if (_words.All(value => value != word))
             {
                 _words.Add(word);
             }
-            else
-            {
-                throw new WordAlreadyAddedException();
-            }
         }
 
-        public IEnumerable<Word> Words => _words.AsEnumerable();
+        public IEnumerable<Translation> Words => _words.AsEnumerable();
 
     }
 }

@@ -5,18 +5,18 @@ namespace Nyelvtanulas.Documents
 {
     public abstract class Document
     {
-        private List<View> views;
+        private List<IView> views;
 
         protected Document()
         {
-            views = new List<View>();
+            views = new List<IView>();
         }
-        public void AddView(View view)
+        public void AddView(IView view)
         {
             views.Add(view);
         }
 
-        public void RemoveView(View view)
+        public void RemoveView(IView view)
         {
             views.Remove(view);
         }
