@@ -42,9 +42,10 @@
             // 
             // Add_Translations_Button
             // 
-            this.Add_Translations_Button.Location = new System.Drawing.Point(252, 395);
+            this.Add_Translations_Button.Location = new System.Drawing.Point(176, 237);
+            this.Add_Translations_Button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Add_Translations_Button.Name = "Add_Translations_Button";
-            this.Add_Translations_Button.Size = new System.Drawing.Size(278, 34);
+            this.Add_Translations_Button.Size = new System.Drawing.Size(195, 20);
             this.Add_Translations_Button.TabIndex = 0;
             this.Add_Translations_Button.Text = "ADD TRANSLATIONS";
             this.Add_Translations_Button.UseVisualStyleBackColor = true;
@@ -52,9 +53,10 @@
             // 
             // Add_Translation_Button
             // 
-            this.Add_Translation_Button.Location = new System.Drawing.Point(468, 343);
+            this.Add_Translation_Button.Location = new System.Drawing.Point(328, 206);
+            this.Add_Translation_Button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Add_Translation_Button.Name = "Add_Translation_Button";
-            this.Add_Translation_Button.Size = new System.Drawing.Size(154, 34);
+            this.Add_Translation_Button.Size = new System.Drawing.Size(108, 20);
             this.Add_Translation_Button.TabIndex = 1;
             this.Add_Translation_Button.Text = "ADD";
             this.Add_Translation_Button.UseVisualStyleBackColor = true;
@@ -63,74 +65,82 @@
             // Translations_ListBox
             // 
             this.Translations_ListBox.FormattingEnabled = true;
-            this.Translations_ListBox.ItemHeight = 25;
-            this.Translations_ListBox.Location = new System.Drawing.Point(660, 173);
+            this.Translations_ListBox.ItemHeight = 15;
+            this.Translations_ListBox.Location = new System.Drawing.Point(462, 104);
+            this.Translations_ListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Translations_ListBox.Name = "Translations_ListBox";
-            this.Translations_ListBox.Size = new System.Drawing.Size(154, 204);
+            this.Translations_ListBox.Size = new System.Drawing.Size(109, 124);
             this.Translations_ListBox.TabIndex = 2;
             // 
             // Add_Translation_TextBox
             // 
-            this.Add_Translation_TextBox.Location = new System.Drawing.Point(468, 282);
+            this.Add_Translation_TextBox.Location = new System.Drawing.Point(328, 169);
+            this.Add_Translation_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Add_Translation_TextBox.Name = "Add_Translation_TextBox";
-            this.Add_Translation_TextBox.Size = new System.Drawing.Size(154, 31);
+            this.Add_Translation_TextBox.Size = new System.Drawing.Size(109, 23);
             this.Add_Translation_TextBox.TabIndex = 3;
             // 
             // Add_Translation_Label
             // 
             this.Add_Translation_Label.AutoSize = true;
-            this.Add_Translation_Label.Location = new System.Drawing.Point(362, 282);
+            this.Add_Translation_Label.Location = new System.Drawing.Point(253, 169);
+            this.Add_Translation_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Add_Translation_Label.Name = "Add_Translation_Label";
-            this.Add_Translation_Label.Size = new System.Drawing.Size(100, 25);
+            this.Add_Translation_Label.Size = new System.Drawing.Size(67, 15);
             this.Add_Translation_Label.TabIndex = 4;
             this.Add_Translation_Label.Text = "Translation:";
             // 
             // Add_Word_Label
             // 
             this.Add_Word_Label.AutoSize = true;
-            this.Add_Word_Label.Location = new System.Drawing.Point(18, 288);
+            this.Add_Word_Label.Location = new System.Drawing.Point(13, 173);
+            this.Add_Word_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Add_Word_Label.Name = "Add_Word_Label";
-            this.Add_Word_Label.Size = new System.Drawing.Size(60, 25);
+            this.Add_Word_Label.Size = new System.Drawing.Size(39, 15);
             this.Add_Word_Label.TabIndex = 5;
             this.Add_Word_Label.Text = "Word:";
             // 
             // Add_Word_TextBox
             // 
-            this.Add_Word_TextBox.Location = new System.Drawing.Point(80, 285);
+            this.Add_Word_TextBox.Location = new System.Drawing.Point(56, 171);
+            this.Add_Word_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Add_Word_TextBox.Name = "Add_Word_TextBox";
-            this.Add_Word_TextBox.Size = new System.Drawing.Size(154, 31);
+            this.Add_Word_TextBox.Size = new System.Drawing.Size(109, 23);
             this.Add_Word_TextBox.TabIndex = 6;
             // 
             // Translations_Label
             // 
             this.Translations_Label.AutoSize = true;
-            this.Translations_Label.Location = new System.Drawing.Point(687, 136);
+            this.Translations_Label.Location = new System.Drawing.Point(481, 82);
+            this.Translations_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Translations_Label.Name = "Translations_Label";
-            this.Translations_Label.Size = new System.Drawing.Size(104, 25);
+            this.Translations_Label.Size = new System.Drawing.Size(69, 15);
             this.Translations_Label.TabIndex = 7;
             this.Translations_Label.Text = "Translations";
             // 
             // Language1_Label
             // 
             this.Language1_Label.AutoSize = true;
-            this.Language1_Label.Location = new System.Drawing.Point(120, 42);
+            this.Language1_Label.Location = new System.Drawing.Point(84, 25);
+            this.Language1_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Language1_Label.Name = "Language1_Label";
-            this.Language1_Label.Size = new System.Drawing.Size(59, 25);
+            this.Language1_Label.Size = new System.Drawing.Size(115, 15);
             this.Language1_Label.TabIndex = 8;
-            this.Language1_Label.Text = Language1;
+            this.Language1_Label.Text = "Translated Language";
             // 
             // Language2_Label
             // 
             this.Language2_Label.AutoSize = true;
-            this.Language2_Label.Location = new System.Drawing.Point(615, 42);
+            this.Language2_Label.Location = new System.Drawing.Point(430, 25);
+            this.Language2_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Language2_Label.Name = "Language2_Label";
-            this.Language2_Label.Size = new System.Drawing.Size(59, 25);
+            this.Language2_Label.Size = new System.Drawing.Size(119, 15);
             this.Language2_Label.TabIndex = 9;
-            this.Language2_Label.Text = Language2;
+            this.Language2_Label.Text = "Translation Language";
             // 
             // Add_Word_View
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Language2_Label);
             this.Controls.Add(this.Language1_Label);
@@ -142,8 +152,9 @@
             this.Controls.Add(this.Translations_ListBox);
             this.Controls.Add(this.Add_Translation_Button);
             this.Controls.Add(this.Add_Translations_Button);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Add_Word_View";
-            this.Size = new System.Drawing.Size(939, 457);
+            this.Size = new System.Drawing.Size(657, 274);
             this.ResumeLayout(false);
             this.PerformLayout();
 

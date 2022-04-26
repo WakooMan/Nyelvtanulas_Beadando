@@ -24,6 +24,8 @@ namespace Nyelvtanulas.Views
             this.Language2 = Language2;
             this.Data = WordData.Current();
             InitializeComponent();
+            Language1_Label.Text = Language1;
+            Language2_Label.Text = Language2;
         }
 
         public Action<UserControl> SetCurrentView { get; private set; }

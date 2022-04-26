@@ -10,5 +10,8 @@
     <Compile Update="Views\InitialView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\Test_View.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

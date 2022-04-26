@@ -15,7 +15,6 @@ E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.dll
 E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\ref\Nyelvtanulas.dll
 E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.pdb
 E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.genruntimeconfig.cache
-E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Nyelvtanulas.resources
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\Nyelvtanulas.exe
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\Nyelvtanulas.deps.json
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\Nyelvtanulas.runtimeconfig.json
@@ -33,7 +32,10 @@ D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\refint\Nyelvtanulas.dl
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.pdb
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.genruntimeconfig.cache
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\ref\Nyelvtanulas.dll
-E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Add_Word_View.resources
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Add_Word_View.resources
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.InitialView.resources
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.NyelvtanulasForm.resources
+E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.NyelvtanulasForm.resources
+E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Add_Word_View.resources
+E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.InitialView.resources
+E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Test_View.resources

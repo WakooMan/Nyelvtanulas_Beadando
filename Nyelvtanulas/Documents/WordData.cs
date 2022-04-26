@@ -6,10 +6,12 @@ namespace Nyelvtanulas.Documents
 {
     public class WordData : Document
     {
-        private Dictionary<string, Language> Languages;
+        private Dictionary<string, Language> languages;
         private List<Translation> _allWords;
 
         private static WordData? current= null;
+
+        public IEnumerable<Language> Languages => languages.Values;
         public static WordData Current()
         {
             if (current is null)
@@ -20,11 +22,11 @@ namespace Nyelvtanulas.Documents
         }
         private WordData()
         {
-            Languages = new Dictionary<string, Language>();
-            Languages.Add(Hungarian.Current().Name(), Hungarian.Current());
-            Languages.Add(English.Current().Name(), English.Current());
+            languages = new Dictionary<string, Language>();
+            languages.Add(Hungarian.Current().Name(), Hungarian.Current());
+            languages.Add(English.Current().Name(), English.Current());
             _allWords = new List<Translation>();
-            foreach (Language lg in Languages.Values)
+            foreach (Language lg in languages.Values)
             {
                 foreach (Translation word in lg.Words)
                 {
@@ -37,7 +39,7 @@ namespace Nyelvtanulas.Documents
         {
             try
             {
-                return Languages[Name];
+                return languages[Name];
             }
             catch (KeyNotFoundException)
             {
@@ -49,7 +51,7 @@ namespace Nyelvtanulas.Documents
         {
             try
             {
-                return Languages[Name].Words;
+                return languages[Name].Words;
             }
             catch (KeyNotFoundException)
             {
