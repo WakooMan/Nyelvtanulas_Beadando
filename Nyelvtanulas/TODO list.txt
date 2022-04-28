@@ -1,0 +1,7 @@
+TODO list:
+-Add table to Database to save test results.
+-Handle Test Your Knowledge button (save test results, show test result and change to exit button.)
+-Create Check Words view
+-Implement exporting to xml file
+-Create Test Results View
+-Polish GUI

@@ -41,14 +41,14 @@ namespace Nyelvtanulas.Views
             this.Check_Language2_Label = new System.Windows.Forms.Label();
             this.Check_Language2_ComboBox = new System.Windows.Forms.ComboBox();
             this.Check_Language1_ComboBox = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Export_To_Xml_Button = new System.Windows.Forms.Button();
             this.Export_Translated_Language_Label = new System.Windows.Forms.Label();
             this.Export_Translation_Language_Label = new System.Windows.Forms.Label();
             this.Export_FileName_Label = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Export_FileName_TextBox = new System.Windows.Forms.TextBox();
+            this.Export_Translation_Language_ComboBox = new System.Windows.Forms.ComboBox();
+            this.Export_Translated_Language_ComboBox = new System.Windows.Forms.ComboBox();
+            this.Test_Results_Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Add_Translation_Button
@@ -167,14 +167,14 @@ namespace Nyelvtanulas.Views
             this.Check_Language1_ComboBox.TabIndex = 11;
             this.Check_Language1_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Check_Language1_ComboBox_SelectedIndexChanged);
             // 
-            // button1
+            // Export_To_Xml_Button
             // 
-            this.button1.Location = new System.Drawing.Point(636, 208);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 32);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "EXPORT TO XML";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Export_To_Xml_Button.Location = new System.Drawing.Point(636, 208);
+            this.Export_To_Xml_Button.Name = "Export_To_Xml_Button";
+            this.Export_To_Xml_Button.Size = new System.Drawing.Size(136, 32);
+            this.Export_To_Xml_Button.TabIndex = 12;
+            this.Export_To_Xml_Button.Text = "EXPORT TO XML";
+            this.Export_To_Xml_Button.UseVisualStyleBackColor = true;
             // 
             // Export_Translated_Language_Label
             // 
@@ -203,50 +203,50 @@ namespace Nyelvtanulas.Views
             this.Export_FileName_Label.TabIndex = 15;
             this.Export_FileName_Label.Text = "FileName";
             // 
-            // textBox1
+            // Export_FileName_TextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(636, 179);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 23);
-            this.textBox1.TabIndex = 16;
+            this.Export_FileName_TextBox.Location = new System.Drawing.Point(636, 179);
+            this.Export_FileName_TextBox.Name = "Export_FileName_TextBox";
+            this.Export_FileName_TextBox.Size = new System.Drawing.Size(136, 23);
+            this.Export_FileName_TextBox.TabIndex = 16;
             // 
-            // comboBox1
+            // Export_Translation_Language_ComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(636, 135);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(136, 23);
-            this.comboBox1.TabIndex = 17;
+            this.Export_Translation_Language_ComboBox.FormattingEnabled = true;
+            this.Export_Translation_Language_ComboBox.Location = new System.Drawing.Point(636, 135);
+            this.Export_Translation_Language_ComboBox.Name = "Export_Translation_Language_ComboBox";
+            this.Export_Translation_Language_ComboBox.Size = new System.Drawing.Size(136, 23);
+            this.Export_Translation_Language_ComboBox.TabIndex = 17;
             // 
-            // comboBox2
+            // Export_Translated_Language_ComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(636, 93);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(136, 23);
-            this.comboBox2.TabIndex = 18;
+            this.Export_Translated_Language_ComboBox.FormattingEnabled = true;
+            this.Export_Translated_Language_ComboBox.Location = new System.Drawing.Point(636, 93);
+            this.Export_Translated_Language_ComboBox.Name = "Export_Translated_Language_ComboBox";
+            this.Export_Translated_Language_ComboBox.Size = new System.Drawing.Size(136, 23);
+            this.Export_Translated_Language_ComboBox.TabIndex = 18;
             // 
-            // button2
+            // Test_Results_Button
             // 
-            this.button2.Location = new System.Drawing.Point(827, 208);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 32);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "TEST RESULTS";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Test_Results_Button.Location = new System.Drawing.Point(827, 208);
+            this.Test_Results_Button.Name = "Test_Results_Button";
+            this.Test_Results_Button.Size = new System.Drawing.Size(115, 32);
+            this.Test_Results_Button.TabIndex = 19;
+            this.Test_Results_Button.Text = "TEST RESULTS";
+            this.Test_Results_Button.UseVisualStyleBackColor = true;
             // 
             // InitialView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Test_Results_Button);
+            this.Controls.Add(this.Export_Translated_Language_ComboBox);
+            this.Controls.Add(this.Export_Translation_Language_ComboBox);
+            this.Controls.Add(this.Export_FileName_TextBox);
             this.Controls.Add(this.Export_FileName_Label);
             this.Controls.Add(this.Export_Translation_Language_Label);
             this.Controls.Add(this.Export_Translated_Language_Label);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Export_To_Xml_Button);
             this.Controls.Add(this.Check_Language1_ComboBox);
             this.Controls.Add(this.Check_Language2_ComboBox);
             this.Controls.Add(this.Check_Language2_Label);
@@ -279,13 +279,13 @@ namespace Nyelvtanulas.Views
         private System.Windows.Forms.Label Check_Language2_Label;
         private System.Windows.Forms.ComboBox Check_Language2_ComboBox;
         private System.Windows.Forms.ComboBox Check_Language1_ComboBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Export_To_Xml_Button;
         private System.Windows.Forms.Label Export_Translated_Language_Label;
         private System.Windows.Forms.Label Export_Translation_Language_Label;
         private System.Windows.Forms.Label Export_FileName_Label;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox Export_FileName_TextBox;
+        private System.Windows.Forms.ComboBox Export_Translation_Language_ComboBox;
+        private System.Windows.Forms.ComboBox Export_Translated_Language_ComboBox;
+        private System.Windows.Forms.Button Test_Results_Button;
     }
 }
