@@ -22,13 +22,18 @@ namespace Nyelvtanulas.Languages
             return Name() == OtherLanguage.Name();
         }
 
-        public List<Translation> PickRandomWords(Language OtherLanguage,List<string>? Exceptions)
+        public bool IsThisLanguage(string OtherLanguage)
+        {
+            return Name() == OtherLanguage;
+        }
+
+        public List<Translation> PickRandomWords(Language OtherLanguage)
         { 
             List<Translation> result = new List<Translation>();
-            List<Translation> ValidWords = _words.Where(value => value.Translation_Language == OtherLanguage.Name() && (Exceptions is null || !Exceptions.Contains(value.Word))).ToList();
-            if (ValidWords.Count < 5)
+            List<Translation> ValidWords = _words.Where(value => value.Translation_Language == OtherLanguage.Name()).ToList();
+            if (ValidWords.Count < 10)
             {
-                throw new NotEnoughWordException();
+                throw new NotEnoughWordException($"{Name()} Language does not have at least 10 translations on {OtherLanguage.Name()} Language.");
             }
             Random rnd = new Random();
             for (int i = 0; i < 5; i++)

@@ -17,27 +17,31 @@ namespace Nyelvtanulas.Views
         private readonly Test Test;
         private readonly Dictionary<int, Label> Language1Labels;
         private readonly Dictionary<int, Label> Language2Labels;
-        public Test_View(Test test)
+        private readonly WordData Data;
+        private Action<UserControl> SetCurrentView { get; set; }
+        public Test_View(WordData Data, Action<UserControl> SetCurrentView, Test test)
         {
             Test = test;
+            this.SetCurrentView = SetCurrentView;
+            this.Data = Data;
             Language1Labels = new Dictionary<int,Label>();
             Language2Labels = new Dictionary<int, Label>();
             InitializeComponent();
             AddLabels();
-            Translated_Language1_Label.Text = Test.Language1;
-            Translation_Language1_Label.Text = Test.Language1;
-            Translated_Language2_Label.Text = Test.Language2;
-            Translation_Language2_Label.Text = Test.Language2;
+            Translated_Language1_Label.Text = Test.First_Language;
+            Translation_Language1_Label.Text = Test.First_Language;
+            Translated_Language2_Label.Text = Test.Second_Language;
+            Translation_Language2_Label.Text = Test.Second_Language;
             int i = 1;
-            foreach (Translation tr in Test.Language1Words)
+            foreach (string Word in Test.FirstLanguageWords)
             {
-                Language1Labels[i].Text = tr.Word;
+                Language1Labels[i].Text = Word;
                 i++;
             }
             i = 1;
-            foreach (Translation tr in Test.Language2Words)
+            foreach (string Word in Test.SecondLanguageWords)
             {
-                Language2Labels[i].Text = tr.Word;
+                Language2Labels[i].Text = Word;
                 i++;
             }
         }

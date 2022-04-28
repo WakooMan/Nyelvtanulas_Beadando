@@ -4,29 +4,21 @@ using System.Linq;
 
 namespace Nyelvtanulas.Documents
 {
-    public class Test : Document
+    public class Test
     {
-        public readonly string Language1;
-        public readonly string Language2;
-        private List<Translation> _language1Words;
-        private List<Translation> _language2Words;
-        public Test(Language language1,Language language2)
+        public readonly string First_Language;
+        public readonly string Second_Language;
+        private List<Translation> _firstLanguageWords;
+        private List<Translation> _secondLanguageWords;
+        public Test(string First_Language,string Second_Language,List<Translation> FirstLanguageWords,List<Translation> SecondLanguageWords)
         {
-            Language1 = language1.Name();
-            Language2 = language2.Name();
-            _language1Words = language1.PickRandomWords(language2,null);
-            List<string> ExceptionWords = new List<string>();
-            foreach (Translation trans in _language1Words)
-            {
-                foreach(string translation in trans.Translations)
-                {
-                    ExceptionWords.Add(translation);
-                }
-            }
-            _language2Words = language2.PickRandomWords(language1,ExceptionWords);
+            this.First_Language = First_Language;
+            this.Second_Language = Second_Language;
+            this._firstLanguageWords = FirstLanguageWords;
+            this._secondLanguageWords = SecondLanguageWords;
         }
 
-        public IEnumerable<Translation> Language1Words => _language1Words.AsEnumerable();
-        public IEnumerable<Translation> Language2Words => _language2Words.AsEnumerable();
+        public IEnumerable<string> FirstLanguageWords => _firstLanguageWords.Select(v => v.Word);
+        public IEnumerable<string> SecondLanguageWords => _secondLanguageWords.Select(v => v.Word);
     }
 }

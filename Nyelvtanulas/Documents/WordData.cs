@@ -1,28 +1,22 @@
 ﻿using Nyelvtanulas.Languages;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
 namespace Nyelvtanulas.Documents
 {
-    public class WordData : Document
+    public class WordData
     {
         private Dictionary<string, Language> Languages;
         private List<string> _allWords;
-        private const string ConnectionString =  @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Repos\C#Beadando\Nyelvtanulas\Forditasok.mdf;Integrated Security=True;Connect Timeout=30";
-        private static WordData? current= null;
+        private readonly string ConnectionString;
 
         public IEnumerable<string> LanguageNames => Languages.Values.Select(value=> value.Name());
-        public static WordData Current()
+        
+        public WordData(string connectionString)
         {
-            if (current is null)
-            {
-                current = new WordData();
-            }
-            return current;
-        }
-        private WordData()
-        {
+            ConnectionString = connectionString;
             Languages = new Dictionary<string, Language>();
             AddLanguage(new Hungarian());
             AddLanguage(new English());
@@ -76,10 +70,17 @@ namespace Nyelvtanulas.Documents
                 foreach (var l in GroupedLists)
                 {
                     List<string> Translations = new();
-                    l.ForEach(v => Translations.Add(v.TranslationItem));
-                    Languages[l[0].Translated_Language].AddTranslation(new Translation(Languages[l[0].Translated_Language],Languages[l[0].Translation_Language],l[0].Word,Translations));
+                    l.ForEach(v => Translations.Add(v.TranslationItem.ToLower()));
+                    Languages[l[0].Translated_Language].AddTranslation(new Translation(Languages[l[0].Translated_Language],Languages[l[0].Translation_Language],l[0].Word.ToLower(),Translations));
                 }
             }
+        }
+
+        public Test CreateTest(string First_Language,string Second_Language)
+        {
+            var _firstLanguageWords = Languages[First_Language].PickRandomWords(Languages[Second_Language]);
+            var _secondLanguageWords = Languages[Second_Language].PickRandomWords(Languages[First_Language]);
+            return new Test(First_Language, Second_Language, _firstLanguageWords, _secondLanguageWords);
         }
 
         private void AddLanguage(Language lg)

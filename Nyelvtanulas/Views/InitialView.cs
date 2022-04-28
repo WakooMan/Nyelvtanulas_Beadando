@@ -1,4 +1,5 @@
 ﻿using Nyelvtanulas.Documents;
+using Nyelvtanulas.Exceptions;
 using Nyelvtanulas.Languages;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,14 @@ using System.Windows.Forms;
 
 namespace Nyelvtanulas.Views
 {
-    public partial class InitialView : UserControl,IView
+    public partial class InitialView : UserControl
     {
         private WordData Data;
         private string[] PreviousValues;
-        public InitialView(Action<UserControl> setCurrentView)
+        public InitialView(WordData Data,Action<UserControl> setCurrentView)
         {
             SetCurrentView = setCurrentView;
-            Data = WordData.Current();
+            this.Data = Data;
             InitializeComponent();
             PreviousValues = new string[4];
             foreach (string lg in Data.LanguageNames)
@@ -35,18 +36,25 @@ namespace Nyelvtanulas.Views
             Check_Language2_ComboBox.SelectedIndex = 0;
         }
 
-        public Action<UserControl> SetCurrentView { get; private set; }
-
-        public void OnUpdate()
-        {
-            throw new NotImplementedException();
-        }
+        private Action<UserControl> SetCurrentView { get; set; }
 
         private void Add_Translation_Button_Click(object sender, EventArgs e)
         {
-
-            Add_Word_View View = new Add_Word_View(this.SetCurrentView,this.Add_Language1_ComboBox.Text,this.Add_Language2_ComboBox.Text);
-            SetCurrentView(View);
+            if (Add_Language1_ComboBox.Text != "None" && Add_Language2_ComboBox.Text != "None")
+            {
+                SetCurrentView(new Add_Word_View(Data, this.SetCurrentView, this.Add_Language1_ComboBox.Text, this.Add_Language2_ComboBox.Text));
+                return;
+            }
+            string message = "";
+            if(Add_Language1_ComboBox.Text == "None")
+            {
+                message += "Translated Language can't be None!\n";
+            }
+            if(Add_Language2_ComboBox.Text == "None")
+            {
+                message += "Translation Language can't be None!";
+            }
+            MessageBox.Show(message);
         }
 
         private void Add_Language1_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,6 +107,33 @@ namespace Nyelvtanulas.Views
                 Check_Language1_ComboBox.Items.Remove(Check_Language2_ComboBox.SelectedItem);
             }
             PreviousValues[3] = (string)Check_Language2_ComboBox.SelectedItem;
+        }
+
+        private void Check_Knowledge_Button_Click(object sender, EventArgs e)
+        {
+            if (Check_Language1_ComboBox.Text != "None" && Check_Language2_ComboBox.Text != "None")
+            {
+                try
+                { 
+                    SetCurrentView(new Test_View(Data, SetCurrentView, Data.CreateTest(Check_Language1_ComboBox.Text, Check_Language2_ComboBox.Text)));
+                    return;
+                }
+                catch(NotEnoughWordException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+            string message = "";
+            if (Check_Language1_ComboBox.Text == "None")
+            {
+                message += "First Language can't be None!\n";
+            }
+            if (Check_Language2_ComboBox.Text == "None")
+            {
+                message += "Second Language can't be None!";
+            }
+            MessageBox.Show(message);
         }
     }
 }

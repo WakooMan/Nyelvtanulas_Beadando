@@ -32,39 +32,16 @@ namespace Nyelvtanulas
         {
             this.SuspendLayout();
             // 
-            // InitialView
+            // NyelvtanulasForm
             // 
-            Nyelvtanulas.Views.InitialView InitialView = new Nyelvtanulas.Views.InitialView(this.SetCurrentView);
-            SetCurrentView(InitialView);
-            // 
-            // Nyelvtanulas
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(939, 457);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Nyelvtanulas";
+            this.ClientSize = new System.Drawing.Size(657, 334);
+            this.Name = "NyelvtanulasForm";
             this.Text = "Nyelvtanulás";
             this.ResumeLayout(false);
 
         }
         #endregion
-        private UserControl _currentView = null;
-        private UserControl CurrentView
-        {
-            get
-            {
-                return _currentView;
-            }
-            set
-            {
-                if (_currentView is not null)
-                {
-                    Controls.Remove(_currentView);
-                }
-                _currentView = value;
-                Controls.Add(_currentView);
-            }
-        }
     }
 }

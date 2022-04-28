@@ -12,28 +12,23 @@ using System.Windows.Forms;
 
 namespace Nyelvtanulas.Views
 {
-    public partial class Add_Word_View : UserControl,IView
+    public partial class Add_Word_View : UserControl
     {
         private WordData Data;
         private readonly string Translated_Language;
         private readonly string Translation_Language;
-        public Add_Word_View(Action<UserControl> setCurrentView,string Translated_Language, string Translation_Language)
+        public Add_Word_View(WordData Data,Action<UserControl> setCurrentView,string Translated_Language, string Translation_Language)
         {
             SetCurrentView = setCurrentView;
             this.Translated_Language = Translated_Language;
             this.Translation_Language = Translation_Language;
-            this.Data = WordData.Current();
+            this.Data = Data;
             InitializeComponent();
             Language1_Label.Text = Translated_Language;
             Language2_Label.Text = Translation_Language;
         }
 
-        public Action<UserControl> SetCurrentView { get; private set; }
-
-        public void OnUpdate()
-        {
-            throw new NotImplementedException();
-        }
+        private Action<UserControl> SetCurrentView { get; set; }
 
         private void Add_Translations_Button_Click(object sender, EventArgs e)
         {
@@ -44,9 +39,10 @@ namespace Nyelvtanulas.Views
                 {
                     translations.Add(item);
                 }
-                Data.AddTranslation(Translated_Language, Translation_Language, Add_Word_TextBox.Text, translations);   
-                InitialView View = new InitialView(this.SetCurrentView);
-                SetCurrentView(View);
+                Data.AddTranslation(Translated_Language, Translation_Language, Add_Word_TextBox.Text.ToLower(), translations);
+                Add_Translation_TextBox.Text = "";
+                Add_Word_TextBox.Text = "";
+                Translations_ListBox.Items.Clear();
             }
             else
             {
@@ -65,9 +61,9 @@ namespace Nyelvtanulas.Views
 
         private void Add_Translation_Button_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(Add_Translation_TextBox.Text) && !Translations_ListBox.Items.Contains(Add_Translation_TextBox.Text))
+            if (!String.IsNullOrEmpty(Add_Translation_TextBox.Text) && !Translations_ListBox.Items.Contains(Add_Translation_TextBox.Text.ToLower()))
             {
-                Translations_ListBox.Items.Add(Add_Translation_TextBox.Text);
+                Translations_ListBox.Items.Add(Add_Translation_TextBox.Text.ToLower());
             }
             else
             {
@@ -82,6 +78,22 @@ namespace Nyelvtanulas.Views
                 }
                 MessageBox.Show(message);
             }
+        }
+
+        private void Back_To_Menu_Button_Click(object sender, EventArgs e)
+        {
+            InitialView View = new InitialView(Data, this.SetCurrentView);
+            SetCurrentView(View);
+        }
+
+        private void Delete_Translation_Button_Click(object sender, EventArgs e)
+        {
+            if (Translations_ListBox.SelectedItem == null)
+            {
+                MessageBox.Show("You didn't select any translation word to delete.");
+                return;
+            }
+            Translations_ListBox.Items.Remove(Translations_ListBox.SelectedItem);
         }
     }
 }

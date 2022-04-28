@@ -38,25 +38,27 @@
             this.Translations_Label = new System.Windows.Forms.Label();
             this.Language1_Label = new System.Windows.Forms.Label();
             this.Language2_Label = new System.Windows.Forms.Label();
+            this.Back_To_Menu_Button = new System.Windows.Forms.Button();
+            this.Delete_Translation_Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Add_Translations_Button
             // 
-            this.Add_Translations_Button.Location = new System.Drawing.Point(176, 237);
-            this.Add_Translations_Button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Add_Translations_Button.Location = new System.Drawing.Point(217, 237);
+            this.Add_Translations_Button.Margin = new System.Windows.Forms.Padding(2);
             this.Add_Translations_Button.Name = "Add_Translations_Button";
             this.Add_Translations_Button.Size = new System.Drawing.Size(195, 20);
             this.Add_Translations_Button.TabIndex = 0;
-            this.Add_Translations_Button.Text = "ADD TRANSLATIONS";
+            this.Add_Translations_Button.Text = "ADD TRANSLATION";
             this.Add_Translations_Button.UseVisualStyleBackColor = true;
             this.Add_Translations_Button.Click += new System.EventHandler(this.Add_Translations_Button_Click);
             // 
             // Add_Translation_Button
             // 
             this.Add_Translation_Button.Location = new System.Drawing.Point(328, 206);
-            this.Add_Translation_Button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Add_Translation_Button.Margin = new System.Windows.Forms.Padding(2);
             this.Add_Translation_Button.Name = "Add_Translation_Button";
-            this.Add_Translation_Button.Size = new System.Drawing.Size(108, 20);
+            this.Add_Translation_Button.Size = new System.Drawing.Size(109, 20);
             this.Add_Translation_Button.TabIndex = 1;
             this.Add_Translation_Button.Text = "ADD";
             this.Add_Translation_Button.UseVisualStyleBackColor = true;
@@ -66,8 +68,8 @@
             // 
             this.Translations_ListBox.FormattingEnabled = true;
             this.Translations_ListBox.ItemHeight = 15;
-            this.Translations_ListBox.Location = new System.Drawing.Point(462, 104);
-            this.Translations_ListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Translations_ListBox.Location = new System.Drawing.Point(462, 77);
+            this.Translations_ListBox.Margin = new System.Windows.Forms.Padding(2);
             this.Translations_ListBox.Name = "Translations_ListBox";
             this.Translations_ListBox.Size = new System.Drawing.Size(109, 124);
             this.Translations_ListBox.TabIndex = 2;
@@ -75,7 +77,7 @@
             // Add_Translation_TextBox
             // 
             this.Add_Translation_TextBox.Location = new System.Drawing.Point(328, 169);
-            this.Add_Translation_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Add_Translation_TextBox.Margin = new System.Windows.Forms.Padding(2);
             this.Add_Translation_TextBox.Name = "Add_Translation_TextBox";
             this.Add_Translation_TextBox.Size = new System.Drawing.Size(109, 23);
             this.Add_Translation_TextBox.TabIndex = 3;
@@ -103,7 +105,7 @@
             // Add_Word_TextBox
             // 
             this.Add_Word_TextBox.Location = new System.Drawing.Point(56, 171);
-            this.Add_Word_TextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Add_Word_TextBox.Margin = new System.Windows.Forms.Padding(2);
             this.Add_Word_TextBox.Name = "Add_Word_TextBox";
             this.Add_Word_TextBox.Size = new System.Drawing.Size(109, 23);
             this.Add_Word_TextBox.TabIndex = 6;
@@ -111,7 +113,7 @@
             // Translations_Label
             // 
             this.Translations_Label.AutoSize = true;
-            this.Translations_Label.Location = new System.Drawing.Point(481, 82);
+            this.Translations_Label.Location = new System.Drawing.Point(480, 60);
             this.Translations_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Translations_Label.Name = "Translations_Label";
             this.Translations_Label.Size = new System.Drawing.Size(69, 15);
@@ -138,10 +140,32 @@
             this.Language2_Label.TabIndex = 9;
             this.Language2_Label.Text = "Translation Language";
             // 
+            // Back_To_Menu_Button
+            // 
+            this.Back_To_Menu_Button.Location = new System.Drawing.Point(13, 234);
+            this.Back_To_Menu_Button.Name = "Back_To_Menu_Button";
+            this.Back_To_Menu_Button.Size = new System.Drawing.Size(116, 23);
+            this.Back_To_Menu_Button.TabIndex = 10;
+            this.Back_To_Menu_Button.Text = "BACK TO MENU";
+            this.Back_To_Menu_Button.UseVisualStyleBackColor = true;
+            this.Back_To_Menu_Button.Click += new System.EventHandler(this.Back_To_Menu_Button_Click);
+            // 
+            // Delete_Translation_Button
+            // 
+            this.Delete_Translation_Button.Location = new System.Drawing.Point(462, 206);
+            this.Delete_Translation_Button.Name = "Delete_Translation_Button";
+            this.Delete_Translation_Button.Size = new System.Drawing.Size(109, 21);
+            this.Delete_Translation_Button.TabIndex = 11;
+            this.Delete_Translation_Button.Text = "DELETE";
+            this.Delete_Translation_Button.UseVisualStyleBackColor = true;
+            this.Delete_Translation_Button.Click += new System.EventHandler(this.Delete_Translation_Button_Click);
+            // 
             // Add_Word_View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Delete_Translation_Button);
+            this.Controls.Add(this.Back_To_Menu_Button);
             this.Controls.Add(this.Language2_Label);
             this.Controls.Add(this.Language1_Label);
             this.Controls.Add(this.Translations_Label);
@@ -152,7 +176,7 @@
             this.Controls.Add(this.Translations_ListBox);
             this.Controls.Add(this.Add_Translation_Button);
             this.Controls.Add(this.Add_Translations_Button);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Add_Word_View";
             this.Size = new System.Drawing.Size(657, 274);
             this.ResumeLayout(false);
@@ -172,5 +196,7 @@
         private System.Windows.Forms.Label Translations_Label;
         private System.Windows.Forms.Label Language1_Label;
         private System.Windows.Forms.Label Language2_Label;
+        private System.Windows.Forms.Button Back_To_Menu_Button;
+        private System.Windows.Forms.Button Delete_Translation_Button;
     }
 }
