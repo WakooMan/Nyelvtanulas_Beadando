@@ -25,7 +25,7 @@ namespace Nyelvtanulas.Languages
         public List<Translation> PickRandomWords(Language OtherLanguage,List<string>? Exceptions)
         { 
             List<Translation> result = new List<Translation>();
-            List<Translation> ValidWords = _words.Where(value => value.Language2 == OtherLanguage.Name() && (Exceptions is null || !Exceptions.Contains(value.Word))).ToList();
+            List<Translation> ValidWords = _words.Where(value => value.Translation_Language == OtherLanguage.Name() && (Exceptions is null || !Exceptions.Contains(value.Word))).ToList();
             if (ValidWords.Count < 5)
             {
                 throw new NotEnoughWordException();
@@ -48,7 +48,11 @@ namespace Nyelvtanulas.Languages
             }
         }
 
-        public IEnumerable<Translation> Words => _words.AsEnumerable();
+        public IEnumerable<string> Words => _words.AsEnumerable().Select(value=> value.Word);
 
+        public Translation? GetTranslation(string translation_Language, string word)
+        {
+            return _words.Find(value => value.Word == word && value.Translation_Language == translation_Language);
+        }
     }
 }

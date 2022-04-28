@@ -22,12 +22,12 @@ namespace Nyelvtanulas.Views
             Data = WordData.Current();
             InitializeComponent();
             PreviousValues = new string[4];
-            foreach (Language lg in Data.Languages)
+            foreach (string lg in Data.LanguageNames)
             {
-                Add_Language1_ComboBox.Items.Add(lg.Name());
-                Add_Language2_ComboBox.Items.Add(lg.Name());
-                Check_Language1_ComboBox.Items.Add(lg.Name());
-                Check_Language2_ComboBox.Items.Add(lg.Name());
+                Add_Language1_ComboBox.Items.Add(lg);
+                Add_Language2_ComboBox.Items.Add(lg);
+                Check_Language1_ComboBox.Items.Add(lg);
+                Check_Language2_ComboBox.Items.Add(lg);
             }
             Add_Language1_ComboBox.SelectedIndex = 0;
             Add_Language2_ComboBox.SelectedIndex = 0;

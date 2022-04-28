@@ -15,17 +15,17 @@ namespace Nyelvtanulas.Views
     public partial class Add_Word_View : UserControl,IView
     {
         private WordData Data;
-        private string Language1;
-        private string Language2;
-        public Add_Word_View(Action<UserControl> setCurrentView,string Language1,string Language2)
+        private readonly string Translated_Language;
+        private readonly string Translation_Language;
+        public Add_Word_View(Action<UserControl> setCurrentView,string Translated_Language, string Translation_Language)
         {
             SetCurrentView = setCurrentView;
-            this.Language1 = Language1;
-            this.Language2 = Language2;
+            this.Translated_Language = Translated_Language;
+            this.Translation_Language = Translation_Language;
             this.Data = WordData.Current();
             InitializeComponent();
-            Language1_Label.Text = Language1;
-            Language2_Label.Text = Language2;
+            Language1_Label.Text = Translated_Language;
+            Language2_Label.Text = Translation_Language;
         }
 
         public Action<UserControl> SetCurrentView { get; private set; }
@@ -39,24 +39,12 @@ namespace Nyelvtanulas.Views
         {
             if (!String.IsNullOrEmpty(Add_Word_TextBox.Text) && Translations_ListBox.Items.Count != 0)
             {
-                Translation? word = Data.GetLanguageWords(Language1).ToList().Find(value => value.Word == Add_Word_TextBox.Text);
-                if (word is null)
+                List<string> translations = new List<string>();
+                foreach (string item in Translations_ListBox.Items)
                 {
-                    List<string> translations = new List<string>();
-                    foreach (string item in Translations_ListBox.Items)
-                    {
-                        translations.Add(item);
-                    }
-                    word = new Translation(Data.GetLanguage(Language1), Data.GetLanguage(Language2), Add_Word_TextBox.Text, translations);
-                    Data.GetLanguage(Language1).AddTranslation(word);
+                    translations.Add(item);
                 }
-                else
-                {
-                    foreach (string item in Translations_ListBox.Items)
-                    {
-                        word.AddTranslationItem(item);
-                    }
-                }
+                Data.AddTranslation(Translated_Language, Translation_Language, Add_Word_TextBox.Text, translations);   
                 InitialView View = new InitialView(this.SetCurrentView);
                 SetCurrentView(View);
             }

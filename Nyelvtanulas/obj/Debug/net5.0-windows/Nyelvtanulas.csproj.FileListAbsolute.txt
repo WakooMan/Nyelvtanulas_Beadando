@@ -39,3 +39,10 @@ E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Nyelvtanu
 E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Add_Word_View.resources
 E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.InitialView.resources
 E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Test_View.resources
+E:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\System.Data.SqlClient.dll
+E:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\win-arm64\native\sni.dll
+E:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\win-x64\native\sni.dll
+E:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\win-x86\native\sni.dll
+E:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.csproj.CopyComplete

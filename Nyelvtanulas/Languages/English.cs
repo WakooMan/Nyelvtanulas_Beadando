@@ -7,18 +7,7 @@
             return "English";
         }
 
-        private English() : base()
+        public English() : base()
         { }
-
-        private static English? current = null;
-
-        public static English Current()
-        {
-            if (current is null)
-            {
-                current = new English();
-            }
-            return current;
-        }
     }
 }

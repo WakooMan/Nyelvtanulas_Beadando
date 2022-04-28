@@ -9,26 +9,28 @@ namespace Nyelvtanulas.Languages
     {
         public readonly string Word;
         private List<string> _translations;
-        private Language _language1;
-        private Language _language2;
+        private Language _translated_Language;
+        private Language _translation_Language;
         public Translation(Language language1,Language language2, string word,List<string> translations)
         {
             Word = word;
-            _language1 = language1;
-            _language2 = language2;
+            _translated_Language = language1;
+            _translation_Language = language2;
             _translations = translations;
         }
 
-        public string Language1 => _language1.Name();
-        public string Language2 => _language2.Name();
+        public string Translated_Language => _translated_Language.Name();
+        public string Translation_Language => _translation_Language.Name();
         public IEnumerable<string> Translations => _translations.AsEnumerable();
 
-        public void AddTranslationItem(string item)
+        public bool TryAddTranslationItem(string item)
         {
-            if(!_translations.Contains(item)) 
+            if(_translations.Contains(item)) 
             {
-               _translations.Add(item); 
+                return false;
             }
+            _translations.Add(item);
+            return true;
         }
     }
 }

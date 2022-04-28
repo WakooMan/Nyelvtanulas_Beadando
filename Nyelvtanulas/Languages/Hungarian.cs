@@ -7,18 +7,7 @@
             return "Hungarian";
         }
 
-        private Hungarian(): base()
+        public Hungarian(): base()
         {}
-
-        private static Hungarian? current = null;
-
-        public static Hungarian Current()
-        {
-            if (current is null)
-            {
-                current = new Hungarian();
-            }
-            return current;
-        }
     }
 }
