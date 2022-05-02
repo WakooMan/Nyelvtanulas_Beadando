@@ -1,7 +1,8 @@
 TODO list:
--Add table to Database to save test results.
--Handle Test Your Knowledge button (save test results, show test result and change to exit button.)
+-Add table to Database to save test results. pipa
+-Handle Test Your Knowledge button (save test results, show test result and change to exit button.) pipa
+-Translations added on both language and synonyms as well. pipa
 -Create Check Words view
--Implement exporting to xml file
+-Implement exporting to xml file pipa
 -Create Test Results View
 -Polish GUI

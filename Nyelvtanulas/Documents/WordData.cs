@@ -2,7 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Nyelvtanulas.Documents
 {
@@ -11,7 +15,7 @@ namespace Nyelvtanulas.Documents
         private Dictionary<string, Language> Languages;
         private List<string> _allWords;
         private readonly string ConnectionString;
-
+        private bool LoadingFromDatabase = false;
         public IEnumerable<string> LanguageNames => Languages.Values.Select(value=> value.Name());
         
         public WordData(string connectionString)
@@ -35,22 +39,31 @@ namespace Nyelvtanulas.Documents
             Translation? translation = Languages[Translated_Language].GetTranslation(Translation_Language, Word);
             if (translation is null)
             {
-                translation = new Translation(Languages[Translated_Language], Languages[Translation_Language], Word, Translations);
+                translation = new Translation(Languages[Translated_Language], Languages[Translation_Language], Word);
                 Languages[translation.Translated_Language].AddTranslation(translation);
-                foreach (string Item in translation.Translations)
-                {
-                    AddToDatabase(Translated_Language, Translation_Language, Word, Item);
-                }
             }
-            else
+            List<Translation> translations = new List<Translation>();
+            foreach (string trans in Translations)
             {
-                foreach (string Item in Translations)
+                Translation? tr = Languages[Translation_Language].GetTranslation(Translated_Language,trans);
+                if (tr is null)
                 {
-                    if (translation.TryAddTranslationItem(Item))
-                    {
-                        AddToDatabase(Translated_Language,Translation_Language,Word,Item);
-                    }
+                    tr = new Translation(Languages[Translation_Language], Languages[Translated_Language], trans);
+                    Languages[tr.Translated_Language].AddTranslation(tr);
                 }
+                translations.Add(tr);
+            }
+            foreach (Translation tr in translations)
+            {
+                if (translation.TryAddTranslationItem(tr) && !LoadingFromDatabase)
+                { 
+                    AddTranslationToDatabase(Translated_Language, Translation_Language, translation.Word, tr.Word);
+                }
+                if (tr.TryAddTranslationItem(translation)&& !LoadingFromDatabase)
+                {
+                    AddTranslationToDatabase(Translation_Language, Translated_Language, tr.Word, translation.Word);
+                }
+                translations.ForEach(value => tr.TryAddSynonym(value));
             }
         }
 
@@ -58,6 +71,8 @@ namespace Nyelvtanulas.Documents
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
+                LoadingFromDatabase = true;
+                List<Translation> AllTranslation = new List<Translation>();
                 connection.Open();
                 SqlCommand command = new SqlCommand("SELECT * FROM Translations;", connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -71,8 +86,9 @@ namespace Nyelvtanulas.Documents
                 {
                     List<string> Translations = new();
                     l.ForEach(v => Translations.Add(v.TranslationItem.ToLower()));
-                    Languages[l[0].Translated_Language].AddTranslation(new Translation(Languages[l[0].Translated_Language],Languages[l[0].Translation_Language],l[0].Word.ToLower(),Translations));
+                    AddTranslation(l[0].Translated_Language,l[0].Translation_Language,l[0].Word,Translations);
                 }
+                LoadingFromDatabase = false;
             }
         }
 
@@ -88,7 +104,7 @@ namespace Nyelvtanulas.Documents
             Languages.Add(lg.Name(), lg);
         }
 
-        private void AddToDatabase(string Translated_Language, string Translation_Language, string Word,string Item)
+        private void AddTranslationToDatabase(string Translated_Language, string Translation_Language, string Word,string Item)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -103,6 +119,15 @@ namespace Nyelvtanulas.Documents
             }
         }
 
+        public void ExportToXml(string Translated_Language, string Translation_Language, string filepath)
+        {
+            var ser = new XmlSerializer(typeof(XmlExporter));
+            var obj = new XmlExporter(Translated_Language, Translation_Language,Languages[Translated_Language].GetTranslations(Translation_Language));
+            using (XmlWriter xw = XmlWriter.Create(new StreamWriter(filepath)))
+            {
+                ser.Serialize(xw, obj);
+            }
+        }
         public IEnumerable<string> GetLanguageWords(string Name)
         {
             try

@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Nyelvtanulas.Languages
-{
+{ 
     public abstract class Language
     {
         private List<Translation> _words;
@@ -58,6 +59,11 @@ namespace Nyelvtanulas.Languages
         public Translation? GetTranslation(string translation_Language, string word)
         {
             return _words.Find(value => value.Word == word && value.Translation_Language == translation_Language);
+        }
+
+        public List<Translation> GetTranslations(string translation_Language)
+        {
+            return _words.FindAll(value => value.Translation_Language == translation_Language);
         }
     }
 }

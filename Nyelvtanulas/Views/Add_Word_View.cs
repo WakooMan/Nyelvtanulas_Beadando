@@ -17,8 +17,10 @@ namespace Nyelvtanulas.Views
         private WordData Data;
         private readonly string Translated_Language;
         private readonly string Translation_Language;
-        public Add_Word_View(WordData Data,Action<UserControl> setCurrentView,string Translated_Language, string Translation_Language)
+        private readonly InitialView View;
+        public Add_Word_View(InitialView View,WordData Data,Action<UserControl> setCurrentView,string Translated_Language, string Translation_Language)
         {
+            this.View = View;
             SetCurrentView = setCurrentView;
             this.Translated_Language = Translated_Language;
             this.Translation_Language = Translation_Language;
@@ -82,7 +84,6 @@ namespace Nyelvtanulas.Views
 
         private void Back_To_Menu_Button_Click(object sender, EventArgs e)
         {
-            InitialView View = new InitialView(Data, this.SetCurrentView);
             SetCurrentView(View);
         }
 

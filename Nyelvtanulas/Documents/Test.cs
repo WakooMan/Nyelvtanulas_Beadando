@@ -1,4 +1,5 @@
 ﻿using Nyelvtanulas.Languages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,15 @@ namespace Nyelvtanulas.Documents
             this._secondLanguageWords = SecondLanguageWords;
         }
 
+        public bool IsGood(int i,string Translated_Word,string Translation_Word)
+        {
+            Translation? trans = (i==1) ? _firstLanguageWords.Find(v => v.Word == Translated_Word) : _secondLanguageWords.Find(v => v.Word == Translated_Word);
+            if (trans is not null)
+            {
+                return trans.Translations.Any(translation => translation == Translation_Word);
+            }
+            throw new Exception();
+        }
         public IEnumerable<string> FirstLanguageWords => _firstLanguageWords.Select(v => v.Word);
         public IEnumerable<string> SecondLanguageWords => _secondLanguageWords.Select(v => v.Word);
     }

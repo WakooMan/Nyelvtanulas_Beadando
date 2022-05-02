@@ -15,25 +15,31 @@ namespace Nyelvtanulas.Views
 {
     public partial class InitialView : UserControl
     {
-        private WordData Data;
+        private readonly WordData Data;
+        private readonly TestResults Results;
         private string[] PreviousValues;
-        public InitialView(WordData Data,Action<UserControl> setCurrentView)
+        public InitialView(WordData Data,TestResults Results,Action<UserControl> setCurrentView)
         {
             SetCurrentView = setCurrentView;
             this.Data = Data;
+            this.Results = Results;
             InitializeComponent();
-            PreviousValues = new string[4];
+            PreviousValues = new string[6];
             foreach (string lg in Data.LanguageNames)
             {
                 Add_Language1_ComboBox.Items.Add(lg);
                 Add_Language2_ComboBox.Items.Add(lg);
                 Check_Language1_ComboBox.Items.Add(lg);
                 Check_Language2_ComboBox.Items.Add(lg);
+                Export_Translated_Language_ComboBox.Items.Add(lg);
+                Export_Translation_Language_ComboBox.Items.Add(lg);
             }
             Add_Language1_ComboBox.SelectedIndex = 0;
             Add_Language2_ComboBox.SelectedIndex = 0;
             Check_Language1_ComboBox.SelectedIndex = 0;
             Check_Language2_ComboBox.SelectedIndex = 0;
+            Export_Translated_Language_ComboBox.SelectedIndex = 0;
+            Export_Translation_Language_ComboBox.SelectedIndex = 0;
         }
 
         private Action<UserControl> SetCurrentView { get; set; }
@@ -42,7 +48,7 @@ namespace Nyelvtanulas.Views
         {
             if (Add_Language1_ComboBox.Text != "None" && Add_Language2_ComboBox.Text != "None")
             {
-                SetCurrentView(new Add_Word_View(Data, this.SetCurrentView, this.Add_Language1_ComboBox.Text, this.Add_Language2_ComboBox.Text));
+                SetCurrentView(new Add_Word_View(this,Data, this.SetCurrentView, this.Add_Language1_ComboBox.Text, this.Add_Language2_ComboBox.Text));
                 return;
             }
             string message = "";
@@ -115,7 +121,7 @@ namespace Nyelvtanulas.Views
             {
                 try
                 { 
-                    SetCurrentView(new Test_View(Data, SetCurrentView, Data.CreateTest(Check_Language1_ComboBox.Text, Check_Language2_ComboBox.Text)));
+                    SetCurrentView(new Test_View(this,Results,SetCurrentView, Data.CreateTest(Check_Language1_ComboBox.Text, Check_Language2_ComboBox.Text)));
                     return;
                 }
                 catch(NotEnoughWordException ex)
@@ -134,6 +140,42 @@ namespace Nyelvtanulas.Views
                 message += "Second Language can't be None!";
             }
             MessageBox.Show(message);
+        }
+
+        private void Export_To_Xml_Button_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog Dialog = new FolderBrowserDialog();
+            if (Dialog.ShowDialog() == DialogResult.OK)
+            {
+                Data.ExportToXml(Export_Translated_Language_ComboBox.Text,Export_Translation_Language_ComboBox.Text,Dialog.SelectedPath+Export_FileName_TextBox.Text);
+                MessageBox.Show("Words exported to XML file successfully.");
+            }
+        }
+
+        private void Export_Translated_Language_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PreviousValues[4] is not null && PreviousValues[4] != "None")
+            {
+                Export_Translation_Language_ComboBox.Items.Add(PreviousValues[4]);
+            }
+            if ((string)Add_Language2_ComboBox.SelectedItem != "None")
+            {
+                Export_Translation_Language_ComboBox.Items.Remove(Export_Translated_Language_ComboBox.SelectedItem);
+            }
+            PreviousValues[4] = (string)Export_Translated_Language_ComboBox.SelectedItem;
+        }
+
+        private void Export_Translation_Language_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PreviousValues[5] is not null && PreviousValues[5] != "None")
+            {
+                Export_Translated_Language_ComboBox.Items.Add(PreviousValues[5]);
+            }
+            if ((string)Add_Language2_ComboBox.SelectedItem != "None")
+            {
+                Export_Translated_Language_ComboBox.Items.Remove(Export_Translation_Language_ComboBox.SelectedItem);
+            }
+            PreviousValues[5] = (string)Export_Translation_Language_ComboBox.SelectedItem;
         }
     }
 }

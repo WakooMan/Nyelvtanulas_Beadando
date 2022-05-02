@@ -53,10 +53,9 @@ namespace Nyelvtanulas.Views
             // 
             // Add_Translation_Button
             // 
-            this.Add_Translation_Button.Location = new System.Drawing.Point(58, 208);
-            this.Add_Translation_Button.Margin = new System.Windows.Forms.Padding(2);
+            this.Add_Translation_Button.Location = new System.Drawing.Point(83, 347);
             this.Add_Translation_Button.Name = "Add_Translation_Button";
-            this.Add_Translation_Button.Size = new System.Drawing.Size(159, 32);
+            this.Add_Translation_Button.Size = new System.Drawing.Size(227, 53);
             this.Add_Translation_Button.TabIndex = 0;
             this.Add_Translation_Button.Text = "ADD TRANSLATION";
             this.Add_Translation_Button.UseVisualStyleBackColor = true;
@@ -64,10 +63,9 @@ namespace Nyelvtanulas.Views
             // 
             // Check_Knowledge_Button
             // 
-            this.Check_Knowledge_Button.Location = new System.Drawing.Point(262, 208);
-            this.Check_Knowledge_Button.Margin = new System.Windows.Forms.Padding(2);
+            this.Check_Knowledge_Button.Location = new System.Drawing.Point(374, 347);
             this.Check_Knowledge_Button.Name = "Check_Knowledge_Button";
-            this.Check_Knowledge_Button.Size = new System.Drawing.Size(150, 32);
+            this.Check_Knowledge_Button.Size = new System.Drawing.Size(214, 53);
             this.Check_Knowledge_Button.TabIndex = 1;
             this.Check_Knowledge_Button.Text = "TEST YOUR KNOWLEDGE";
             this.Check_Knowledge_Button.UseVisualStyleBackColor = true;
@@ -75,10 +73,9 @@ namespace Nyelvtanulas.Views
             // 
             // Check_Word_Button
             // 
-            this.Check_Word_Button.Location = new System.Drawing.Point(431, 208);
-            this.Check_Word_Button.Margin = new System.Windows.Forms.Padding(2);
+            this.Check_Word_Button.Location = new System.Drawing.Point(616, 347);
             this.Check_Word_Button.Name = "Check_Word_Button";
-            this.Check_Word_Button.Size = new System.Drawing.Size(159, 32);
+            this.Check_Word_Button.Size = new System.Drawing.Size(227, 53);
             this.Check_Word_Button.TabIndex = 2;
             this.Check_Word_Button.Text = "CHECK WORDS";
             this.Check_Word_Button.UseVisualStyleBackColor = true;
@@ -86,20 +83,18 @@ namespace Nyelvtanulas.Views
             // Add_Language1_Label
             // 
             this.Add_Language1_Label.AutoSize = true;
-            this.Add_Language1_Label.Location = new System.Drawing.Point(58, 87);
-            this.Add_Language1_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Add_Language1_Label.Location = new System.Drawing.Point(83, 145);
             this.Add_Language1_Label.Name = "Add_Language1_Label";
-            this.Add_Language1_Label.Size = new System.Drawing.Size(115, 15);
+            this.Add_Language1_Label.Size = new System.Drawing.Size(173, 25);
             this.Add_Language1_Label.TabIndex = 4;
             this.Add_Language1_Label.Text = "Translated Language";
             // 
             // Add_Language2_Label
             // 
             this.Add_Language2_Label.AutoSize = true;
-            this.Add_Language2_Label.Location = new System.Drawing.Point(58, 148);
-            this.Add_Language2_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Add_Language2_Label.Location = new System.Drawing.Point(83, 247);
             this.Add_Language2_Label.Name = "Add_Language2_Label";
-            this.Add_Language2_Label.Size = new System.Drawing.Size(119, 15);
+            this.Add_Language2_Label.Size = new System.Drawing.Size(178, 25);
             this.Add_Language2_Label.TabIndex = 5;
             this.Add_Language2_Label.Text = "Translation Language";
             // 
@@ -108,10 +103,9 @@ namespace Nyelvtanulas.Views
             this.Add_Language2_ComboBox.FormattingEnabled = true;
             this.Add_Language2_ComboBox.Items.AddRange(new object[] {
             "None"});
-            this.Add_Language2_ComboBox.Location = new System.Drawing.Point(58, 173);
-            this.Add_Language2_ComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.Add_Language2_ComboBox.Location = new System.Drawing.Point(83, 288);
             this.Add_Language2_ComboBox.Name = "Add_Language2_ComboBox";
-            this.Add_Language2_ComboBox.Size = new System.Drawing.Size(129, 23);
+            this.Add_Language2_ComboBox.Size = new System.Drawing.Size(183, 33);
             this.Add_Language2_ComboBox.TabIndex = 6;
             this.Add_Language2_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Add_Language2_ComboBox_SelectedIndexChanged);
             // 
@@ -120,28 +114,29 @@ namespace Nyelvtanulas.Views
             this.Add_Language1_ComboBox.FormattingEnabled = true;
             this.Add_Language1_ComboBox.Items.AddRange(new object[] {
             "None"});
-            this.Add_Language1_ComboBox.Location = new System.Drawing.Point(58, 113);
-            this.Add_Language1_ComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.Add_Language1_ComboBox.Location = new System.Drawing.Point(83, 188);
             this.Add_Language1_ComboBox.Name = "Add_Language1_ComboBox";
-            this.Add_Language1_ComboBox.Size = new System.Drawing.Size(129, 23);
+            this.Add_Language1_ComboBox.Size = new System.Drawing.Size(183, 33);
             this.Add_Language1_ComboBox.TabIndex = 7;
             this.Add_Language1_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Add_Language1_ComboBox_SelectedIndexChanged);
             // 
             // Check_Language1_Label
             // 
             this.Check_Language1_Label.AutoSize = true;
-            this.Check_Language1_Label.Location = new System.Drawing.Point(262, 87);
+            this.Check_Language1_Label.Location = new System.Drawing.Point(374, 145);
+            this.Check_Language1_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Check_Language1_Label.Name = "Check_Language1_Label";
-            this.Check_Language1_Label.Size = new System.Drawing.Size(84, 15);
+            this.Check_Language1_Label.Size = new System.Drawing.Size(127, 25);
             this.Check_Language1_Label.TabIndex = 8;
             this.Check_Language1_Label.Text = "First Language";
             // 
             // Check_Language2_Label
             // 
             this.Check_Language2_Label.AutoSize = true;
-            this.Check_Language2_Label.Location = new System.Drawing.Point(262, 148);
+            this.Check_Language2_Label.Location = new System.Drawing.Point(374, 247);
+            this.Check_Language2_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Check_Language2_Label.Name = "Check_Language2_Label";
-            this.Check_Language2_Label.Size = new System.Drawing.Size(101, 15);
+            this.Check_Language2_Label.Size = new System.Drawing.Size(153, 25);
             this.Check_Language2_Label.TabIndex = 9;
             this.Check_Language2_Label.Text = "Second Language";
             // 
@@ -150,9 +145,10 @@ namespace Nyelvtanulas.Views
             this.Check_Language2_ComboBox.FormattingEnabled = true;
             this.Check_Language2_ComboBox.Items.AddRange(new object[] {
             "None"});
-            this.Check_Language2_ComboBox.Location = new System.Drawing.Point(262, 173);
+            this.Check_Language2_ComboBox.Location = new System.Drawing.Point(374, 288);
+            this.Check_Language2_ComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Check_Language2_ComboBox.Name = "Check_Language2_ComboBox";
-            this.Check_Language2_ComboBox.Size = new System.Drawing.Size(121, 23);
+            this.Check_Language2_ComboBox.Size = new System.Drawing.Size(171, 33);
             this.Check_Language2_ComboBox.TabIndex = 10;
             this.Check_Language2_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Check_Language2_ComboBox_SelectedIndexChanged);
             // 
@@ -161,83 +157,99 @@ namespace Nyelvtanulas.Views
             this.Check_Language1_ComboBox.FormattingEnabled = true;
             this.Check_Language1_ComboBox.Items.AddRange(new object[] {
             "None"});
-            this.Check_Language1_ComboBox.Location = new System.Drawing.Point(262, 113);
+            this.Check_Language1_ComboBox.Location = new System.Drawing.Point(374, 188);
+            this.Check_Language1_ComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Check_Language1_ComboBox.Name = "Check_Language1_ComboBox";
-            this.Check_Language1_ComboBox.Size = new System.Drawing.Size(121, 23);
+            this.Check_Language1_ComboBox.Size = new System.Drawing.Size(171, 33);
             this.Check_Language1_ComboBox.TabIndex = 11;
             this.Check_Language1_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Check_Language1_ComboBox_SelectedIndexChanged);
             // 
             // Export_To_Xml_Button
             // 
-            this.Export_To_Xml_Button.Location = new System.Drawing.Point(636, 208);
+            this.Export_To_Xml_Button.Location = new System.Drawing.Point(909, 347);
+            this.Export_To_Xml_Button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Export_To_Xml_Button.Name = "Export_To_Xml_Button";
-            this.Export_To_Xml_Button.Size = new System.Drawing.Size(136, 32);
+            this.Export_To_Xml_Button.Size = new System.Drawing.Size(194, 53);
             this.Export_To_Xml_Button.TabIndex = 12;
             this.Export_To_Xml_Button.Text = "EXPORT TO XML";
             this.Export_To_Xml_Button.UseVisualStyleBackColor = true;
+            this.Export_To_Xml_Button.Click += new System.EventHandler(this.Export_To_Xml_Button_Click);
             // 
             // Export_Translated_Language_Label
             // 
             this.Export_Translated_Language_Label.AutoSize = true;
-            this.Export_Translated_Language_Label.Location = new System.Drawing.Point(636, 75);
+            this.Export_Translated_Language_Label.Location = new System.Drawing.Point(909, 125);
+            this.Export_Translated_Language_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Export_Translated_Language_Label.Name = "Export_Translated_Language_Label";
-            this.Export_Translated_Language_Label.Size = new System.Drawing.Size(115, 15);
+            this.Export_Translated_Language_Label.Size = new System.Drawing.Size(173, 25);
             this.Export_Translated_Language_Label.TabIndex = 13;
             this.Export_Translated_Language_Label.Text = "Translated Language";
             // 
             // Export_Translation_Language_Label
             // 
             this.Export_Translation_Language_Label.AutoSize = true;
-            this.Export_Translation_Language_Label.Location = new System.Drawing.Point(636, 118);
+            this.Export_Translation_Language_Label.Location = new System.Drawing.Point(909, 197);
+            this.Export_Translation_Language_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Export_Translation_Language_Label.Name = "Export_Translation_Language_Label";
-            this.Export_Translation_Language_Label.Size = new System.Drawing.Size(119, 15);
+            this.Export_Translation_Language_Label.Size = new System.Drawing.Size(178, 25);
             this.Export_Translation_Language_Label.TabIndex = 14;
             this.Export_Translation_Language_Label.Text = "Translation Language";
             // 
             // Export_FileName_Label
             // 
             this.Export_FileName_Label.AutoSize = true;
-            this.Export_FileName_Label.Location = new System.Drawing.Point(636, 161);
+            this.Export_FileName_Label.Location = new System.Drawing.Point(909, 268);
+            this.Export_FileName_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Export_FileName_Label.Name = "Export_FileName_Label";
-            this.Export_FileName_Label.Size = new System.Drawing.Size(57, 15);
+            this.Export_FileName_Label.Size = new System.Drawing.Size(85, 25);
             this.Export_FileName_Label.TabIndex = 15;
             this.Export_FileName_Label.Text = "FileName";
             // 
             // Export_FileName_TextBox
             // 
-            this.Export_FileName_TextBox.Location = new System.Drawing.Point(636, 179);
+            this.Export_FileName_TextBox.Location = new System.Drawing.Point(909, 298);
+            this.Export_FileName_TextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Export_FileName_TextBox.Name = "Export_FileName_TextBox";
-            this.Export_FileName_TextBox.Size = new System.Drawing.Size(136, 23);
+            this.Export_FileName_TextBox.Size = new System.Drawing.Size(193, 31);
             this.Export_FileName_TextBox.TabIndex = 16;
             // 
             // Export_Translation_Language_ComboBox
             // 
             this.Export_Translation_Language_ComboBox.FormattingEnabled = true;
-            this.Export_Translation_Language_ComboBox.Location = new System.Drawing.Point(636, 135);
+            this.Export_Translation_Language_ComboBox.Items.AddRange(new object[] {
+            "None"});
+            this.Export_Translation_Language_ComboBox.Location = new System.Drawing.Point(909, 225);
+            this.Export_Translation_Language_ComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Export_Translation_Language_ComboBox.Name = "Export_Translation_Language_ComboBox";
-            this.Export_Translation_Language_ComboBox.Size = new System.Drawing.Size(136, 23);
+            this.Export_Translation_Language_ComboBox.Size = new System.Drawing.Size(193, 33);
             this.Export_Translation_Language_ComboBox.TabIndex = 17;
+            this.Export_Translation_Language_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Export_Translation_Language_ComboBox_SelectedIndexChanged);
             // 
             // Export_Translated_Language_ComboBox
             // 
             this.Export_Translated_Language_ComboBox.FormattingEnabled = true;
-            this.Export_Translated_Language_ComboBox.Location = new System.Drawing.Point(636, 93);
+            this.Export_Translated_Language_ComboBox.Items.AddRange(new object[] {
+            "None"});
+            this.Export_Translated_Language_ComboBox.Location = new System.Drawing.Point(909, 155);
+            this.Export_Translated_Language_ComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Export_Translated_Language_ComboBox.Name = "Export_Translated_Language_ComboBox";
-            this.Export_Translated_Language_ComboBox.Size = new System.Drawing.Size(136, 23);
+            this.Export_Translated_Language_ComboBox.Size = new System.Drawing.Size(193, 33);
             this.Export_Translated_Language_ComboBox.TabIndex = 18;
+            this.Export_Translated_Language_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Export_Translated_Language_ComboBox_SelectedIndexChanged);
             // 
             // Test_Results_Button
             // 
-            this.Test_Results_Button.Location = new System.Drawing.Point(827, 208);
+            this.Test_Results_Button.Location = new System.Drawing.Point(1181, 347);
+            this.Test_Results_Button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Test_Results_Button.Name = "Test_Results_Button";
-            this.Test_Results_Button.Size = new System.Drawing.Size(115, 32);
+            this.Test_Results_Button.Size = new System.Drawing.Size(164, 53);
             this.Test_Results_Button.TabIndex = 19;
             this.Test_Results_Button.Text = "TEST RESULTS";
             this.Test_Results_Button.UseVisualStyleBackColor = true;
             // 
             // InitialView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Test_Results_Button);
             this.Controls.Add(this.Export_Translated_Language_ComboBox);
@@ -258,9 +270,8 @@ namespace Nyelvtanulas.Views
             this.Controls.Add(this.Check_Word_Button);
             this.Controls.Add(this.Check_Knowledge_Button);
             this.Controls.Add(this.Add_Translation_Button);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InitialView";
-            this.Size = new System.Drawing.Size(1001, 325);
+            this.Size = new System.Drawing.Size(1430, 542);
             this.ResumeLayout(false);
             this.PerformLayout();
 

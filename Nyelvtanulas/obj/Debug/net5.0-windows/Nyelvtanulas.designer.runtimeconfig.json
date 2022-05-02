@@ -6,9 +6,8 @@
       "version": "5.0.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\vitya\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\vitya\\.nuget\\packages",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "C:\\Users\\Viktor\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Viktor\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
