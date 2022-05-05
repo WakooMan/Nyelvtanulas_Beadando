@@ -7,6 +7,9 @@
     <Compile Update="Views\Add_Word_View.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\CheckWords_View.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\InitialView.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -10,13 +10,13 @@ namespace Nyelvtanulas.Documents
         public string Word { get; set; }
         [XmlElement("Translation")]
         public List<string> Translations { get; set; }
-        public XmlTranslation(Translation trans)
+        public XmlTranslation(Language lang,Word trans)
         {
-            Word = trans.Word;
+            Word = trans.Text;
             Translations = new List<string>();
-            foreach (var translation in trans.Translations)
+            foreach (Word w in trans.Translations(lang))
             {
-                Translations.Add(translation);
+                Translations.Add(w.Text);
             }
         }
         public XmlTranslation()

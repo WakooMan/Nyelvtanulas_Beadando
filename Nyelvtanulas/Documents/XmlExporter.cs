@@ -18,14 +18,14 @@ namespace Nyelvtanulas.Documents
         [XmlElement("Translation")]
         public List<XmlTranslation> Translations { get; set; }
 
-        public XmlExporter(string translated_Language,string translation_Language,List<Translation> translations)
+        public XmlExporter(Language translated_Language,Language translation_Language,List<Word> translations)
         {
-            Translated_Language = translated_Language;
-            Translation_Language = translation_Language;
+            Translated_Language = translated_Language.Name();
+            Translation_Language = translation_Language.Name();
             Translations = new List<XmlTranslation>();
-            foreach (Translation trans in translations)
+            foreach (Word trans in translations)
             {
-                Translations.Add(new XmlTranslation(trans));
+                Translations.Add(new XmlTranslation(translation_Language,trans));
             }
         }
 

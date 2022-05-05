@@ -54,3 +54,5 @@ D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\unix\lib\netc
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Test_View.resources
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.csproj.CopyComplete
+D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.CheckWords_View.resources
+D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\System.Windows.Forms.DataVisualization.dll

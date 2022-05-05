@@ -79,6 +79,7 @@ namespace Nyelvtanulas.Views
             this.Check_Word_Button.TabIndex = 2;
             this.Check_Word_Button.Text = "CHECK WORDS";
             this.Check_Word_Button.UseVisualStyleBackColor = true;
+            this.Check_Word_Button.Click += new System.EventHandler(this.Check_Word_Button_Click);
             // 
             // Add_Language1_Label
             // 

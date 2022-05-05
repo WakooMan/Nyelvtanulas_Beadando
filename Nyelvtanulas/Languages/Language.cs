@@ -10,12 +10,12 @@ namespace Nyelvtanulas.Languages
 { 
     public abstract class Language
     {
-        private List<Translation> _words;
+        private List<Word> _words;
         public abstract string Name();
 
         protected Language()
         {
-            _words = new List<Translation>();
+            _words = new List<Word>();
         }
 
         public bool IsThisLanguage(Language OtherLanguage)
@@ -28,10 +28,10 @@ namespace Nyelvtanulas.Languages
             return Name() == OtherLanguage;
         }
 
-        public List<Translation> PickRandomWords(Language OtherLanguage)
+        public List<Word> PickRandomWords(Language OtherLanguage)
         { 
-            List<Translation> result = new List<Translation>();
-            List<Translation> ValidWords = _words.Where(value => value.Translation_Language == OtherLanguage.Name()).ToList();
+            List<Word> result = new List<Word>();
+            List<Word> ValidWords = _words.Where(value => value.Translations(OtherLanguage).Count()>0).ToList();
             if (ValidWords.Count < 10)
             {
                 throw new NotEnoughWordException($"{Name()} Language does not have at least 10 translations on {OtherLanguage.Name()} Language.");
@@ -39,31 +39,54 @@ namespace Nyelvtanulas.Languages
             Random rnd = new Random();
             for (int i = 0; i < 5; i++)
             {
-                Translation temp = ValidWords[rnd.Next(0, ValidWords.Count - 1)];
+                Word temp = ValidWords[rnd.Next(0, ValidWords.Count - 1)];
                 ValidWords.Remove(temp);
                 result.Add(temp);
             }
             return result;
         }
 
-        public void AddTranslation(Translation word)
+        public void AddTranslation(Word Translated_Word,Word Translation_Word)
         {
-            if (_words.All(value => value != word))
+            Word? w = _words.Find(word => word.Text == Translated_Word.Text);
+            if (w is not null)
             {
-                _words.Add(word);
+                if (IsThisLanguage(w.Language))
+                {
+                    throw new TriedToAddSameLanguageTranslationException();
+                }
+                w.TryAddTranslation(Translation_Word);
+            }
+            else
+            {
+                throw new TranslatedWordNotFoundException();
             }
         }
 
-        public IEnumerable<string> Words => _words.AsEnumerable().Select(value=> value.Word);
-
-        public Translation? GetTranslation(string translation_Language, string word)
+        public Word AddWord(string Word)
         {
-            return _words.Find(value => value.Word == word && value.Translation_Language == translation_Language);
+            if (_words.All(word => word.Text != Word))
+            {
+                Word temp = new Word(this, Word);
+                _words.Add(temp);
+                return temp;
+            }
+            else
+            {
+                throw new WordAlreadyAddedException();
+            }
         }
 
-        public List<Translation> GetTranslations(string translation_Language)
+        public IEnumerable<string> Words => _words.AsEnumerable().Select(value=> value.Text);
+
+        public Word? GetWord(string word)
         {
-            return _words.FindAll(value => value.Translation_Language == translation_Language);
+            return _words.Find(value => value.Text == word);
+        }
+
+        public List<Word> GetWords(Language Translation_Language)
+        {
+            return _words.FindAll(value => value.Translations(Translation_Language).Count()>0);
         }
     }
 }

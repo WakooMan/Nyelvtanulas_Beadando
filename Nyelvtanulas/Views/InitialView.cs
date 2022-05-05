@@ -177,5 +177,10 @@ namespace Nyelvtanulas.Views
             }
             PreviousValues[5] = (string)Export_Translation_Language_ComboBox.SelectedItem;
         }
+
+        private void Check_Word_Button_Click(object sender, EventArgs e)
+        {
+            SetCurrentView(new CheckWords_View(this,Data,SetCurrentView));
+        }
     }
 }

@@ -13,9 +13,7 @@ namespace Nyelvtanulas.Documents
     public class WordData
     {
         private Dictionary<string, Language> Languages;
-        private List<string> _allWords;
         private readonly string ConnectionString;
-        private bool LoadingFromDatabase = false;
         public IEnumerable<string> LanguageNames => Languages.Values.Select(value=> value.Name());
         
         public WordData(string connectionString)
@@ -25,54 +23,58 @@ namespace Nyelvtanulas.Documents
             AddLanguage(new Hungarian());
             AddLanguage(new English());
             LoadFromDataBase();
-            _allWords = new List<string>();
-            foreach (Language lg in Languages.Values)
-            {
-                foreach (string word in lg.Words)
-                {
-                    _allWords.Add(word);
-                }
-            }
         }
         public void AddTranslation(string Translated_Language,string Translation_Language,string Word,List<string> Translations)
         {
-            Translation? translation = Languages[Translated_Language].GetTranslation(Translation_Language, Word);
-            if (translation is null)
+            Word? word = Languages[Translated_Language].GetWord(Word);
+            List<Word> translations = new List<Word>();
+            if (word is null)
             {
-                translation = new Translation(Languages[Translated_Language], Languages[Translation_Language], Word);
-                Languages[translation.Translated_Language].AddTranslation(translation);
+                word = Languages[Translated_Language].AddWord(Word);
             }
-            List<Translation> translations = new List<Translation>();
             foreach (string trans in Translations)
             {
-                Translation? tr = Languages[Translation_Language].GetTranslation(Translated_Language,trans);
+                Word? tr = Languages[Translation_Language].GetWord(trans);
                 if (tr is null)
                 {
-                    tr = new Translation(Languages[Translation_Language], Languages[Translated_Language], trans);
-                    Languages[tr.Translated_Language].AddTranslation(tr);
+                    tr = Languages[Translation_Language].AddWord(trans);
                 }
                 translations.Add(tr);
             }
-            foreach (Translation tr in translations)
+
+            //Add Translations
+            foreach (Word tr in translations)
             {
-                if (translation.TryAddTranslationItem(tr) && !LoadingFromDatabase)
-                { 
-                    AddTranslationToDatabase(Translated_Language, Translation_Language, translation.Word, tr.Word);
-                }
-                if (tr.TryAddTranslationItem(translation)&& !LoadingFromDatabase)
+                if(word.TryAddTranslation(tr))
                 {
-                    AddTranslationToDatabase(Translation_Language, Translated_Language, tr.Word, translation.Word);
+                    AddTranslationToDatabase(Translated_Language, Translation_Language, word.Text, tr.Text);
                 }
-                translations.ForEach(value => tr.TryAddSynonym(value));
+                if (tr.TryAddTranslation(word))
+                {
+                    AddTranslationToDatabase(Translation_Language, Translated_Language, tr.Text, word.Text);
+                }
             }
+        }
+
+        private void LoadTranslation(string Translated_Language, string Translation_Language, string Word, string Translation)
+        {
+            Word? word = Languages[Translated_Language].GetWord(Word);
+            Word? translation = Languages[Translation_Language].GetWord(Translation);
+            if (word is null)
+            {
+                word = Languages[Translated_Language].AddWord(Word);
+            }
+            if (translation is null)
+            {
+                translation = Languages[Translation_Language].AddWord(Translation);
+            }
+            word.TryAddTranslation(translation);
         }
 
         private void LoadFromDataBase()
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                LoadingFromDatabase = true;
-                List<Translation> AllTranslation = new List<Translation>();
                 connection.Open();
                 SqlCommand command = new SqlCommand("SELECT * FROM Translations;", connection);
                 SqlDataReader reader = command.ExecuteReader();
@@ -84,11 +86,8 @@ namespace Nyelvtanulas.Documents
                 var GroupedLists = list.GroupBy(value => new { value.Translated_Language, value.Translation_Language, value.Word }).Select(v => v.ToList()).ToList();
                 foreach (var l in GroupedLists)
                 {
-                    List<string> Translations = new();
-                    l.ForEach(v => Translations.Add(v.TranslationItem.ToLower()));
-                    AddTranslation(l[0].Translated_Language,l[0].Translation_Language,l[0].Word,Translations);
+                    l.ForEach(v => LoadTranslation(v.Translated_Language, v.Translation_Language, v.Word, v.TranslationItem));
                 }
-                LoadingFromDatabase = false;
             }
         }
 
@@ -96,7 +95,7 @@ namespace Nyelvtanulas.Documents
         {
             var _firstLanguageWords = Languages[First_Language].PickRandomWords(Languages[Second_Language]);
             var _secondLanguageWords = Languages[Second_Language].PickRandomWords(Languages[First_Language]);
-            return new Test(First_Language, Second_Language, _firstLanguageWords, _secondLanguageWords);
+            return new Test(Languages[First_Language], Languages[Second_Language], _firstLanguageWords, _secondLanguageWords);
         }
 
         private void AddLanguage(Language lg)
@@ -122,7 +121,7 @@ namespace Nyelvtanulas.Documents
         public void ExportToXml(string Translated_Language, string Translation_Language, string filepath)
         {
             var ser = new XmlSerializer(typeof(XmlExporter));
-            var obj = new XmlExporter(Translated_Language, Translation_Language,Languages[Translated_Language].GetTranslations(Translation_Language));
+            var obj = new XmlExporter(Languages[Translated_Language], Languages[Translation_Language],Languages[Translated_Language].GetWords(Languages[Translation_Language]));
             using (XmlWriter xw = XmlWriter.Create(new StreamWriter(filepath)))
             {
                 ser.Serialize(xw, obj);
@@ -142,7 +141,12 @@ namespace Nyelvtanulas.Documents
 
         public IEnumerable<string> AllWords()
         {
-            return _allWords.AsEnumerable();
+            var list = new List<string>();
+            foreach (Language lang in Languages.Values)
+            {
+                list.AddRange(lang.Words);
+            }
+            return list.AsEnumerable();
         }
     }
 }
