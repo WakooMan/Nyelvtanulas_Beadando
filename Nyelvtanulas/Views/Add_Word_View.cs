@@ -18,6 +18,8 @@ namespace Nyelvtanulas.Views
         private readonly string Translated_Language;
         private readonly string Translation_Language;
         private readonly InitialView View;
+        private readonly Dictionary<Control, Rectangle> ControlPercentages;
+
         public Add_Word_View(InitialView View,WordData Data,Action<UserControl> setCurrentView,string Translated_Language, string Translation_Language)
         {
             this.View = View;
@@ -26,6 +28,11 @@ namespace Nyelvtanulas.Views
             this.Translation_Language = Translation_Language;
             this.Data = Data;
             InitializeComponent();
+            ControlPercentages = new Dictionary<Control, Rectangle>();
+            foreach (Control control in Controls)
+            {
+                ControlPercentages.Add(control, new Rectangle(new Point((int)((double)control.Location.X / Size.Width * 100), (int)((double)control.Location.Y / Size.Height * 100)), new Size((int)((double)control.Size.Width / Size.Width * 100), (int)((double)control.Size.Height / Size.Height * 100))));
+            }
             Language1_Label.Text = Translated_Language;
             Language2_Label.Text = Translation_Language;
         }
@@ -95,6 +102,15 @@ namespace Nyelvtanulas.Views
                 return;
             }
             Translations_ListBox.Items.Remove(Translations_ListBox.SelectedItem);
+        }
+
+        private void Add_Word_View_Resize(object sender, EventArgs e)
+        {
+            foreach (Control control in Controls)
+            {
+                control.Location = new Point(Size.Width * ControlPercentages[control].X / 100, Size.Height * ControlPercentages[control].Y / 100);
+                control.Size = new Size(Size.Width * ControlPercentages[control].Width / 100, Size.Height * ControlPercentages[control].Height / 100);
+            }
         }
     }
 }

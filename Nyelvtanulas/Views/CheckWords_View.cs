@@ -15,7 +15,9 @@ namespace Nyelvtanulas.Views
     {
         private readonly WordData Data;
         private readonly InitialView View;
-        private readonly Chart chart1;
+        private readonly Chart chart;
+        private readonly Dictionary<Control, Rectangle> ControlPercentages;
+
         private Action<UserControl> SetCurrentView { get; set; }
         public CheckWords_View(InitialView view,WordData data, Action<UserControl> setCurrentView)
         {
@@ -23,13 +25,14 @@ namespace Nyelvtanulas.Views
             this.View = view;
             this.SetCurrentView = setCurrentView;
             InitializeComponent();
-            chart1 = new Chart();
-            chart1.Location = new Point(0,0);
-            chart1.Size = new Size(400,400);
-            chart1.Titles.Add("Word Counts of Languages");
-            Series series = chart1.Series.Add("WordCounts");
-            ChartArea area = chart1.ChartAreas.Add("WordCountArea");
-            Legend legend = chart1.Legends.Add("WordCountLegend");
+            chart = new Chart();
+            chart.Location = new Point(100,50);
+            chart.Size = new Size(900,350);
+            chart.BackColor = Color.Yellow;
+            chart.Titles.Add("Word Counts of Languages");
+            Series series = chart.Series.Add("WordCounts");
+            ChartArea area = chart.ChartAreas.Add("WordCountArea");
+            Legend legend = chart.Legends.Add("WordCountLegend");
             series.IsValueShownAsLabel = true;
             series.ChartArea = area.Name;
             series.Legend = legend.Name;
@@ -39,13 +42,22 @@ namespace Nyelvtanulas.Views
             {
                 series.Points.AddXY(language,Math.Round(Data.GetLanguageWords(language).Count()/AllWordsCount * 100));
             }
-            this.Controls.Add(chart1);
+            this.Controls.Add(chart);
+            ControlPercentages = new Dictionary<Control, Rectangle>();
+            foreach (Control control in Controls)
+            {
+                ControlPercentages.Add(control, new Rectangle(new Point((int)((double)control.Location.X / Size.Width * 100), (int)((double)control.Location.Y / Size.Height * 100)), new Size((int)((double)control.Size.Width / Size.Width * 100), (int)((double)control.Size.Height / Size.Height * 100))));
+            }
             Translated_Language_ComboBox.Items.AddRange(Data.LanguageNames.ToArray());
             Translated_Language_ComboBox.SelectedIndex = 0;
+            Translation_Language_ComboBox.SelectedIndex = 0;
         }
 
         private void Translated_Language_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ClearTranslationStuff();
+            Translation_Language_ComboBox.Visible = false;
+            Choose_Translation_Label.Visible = false;
             Translated_Language_ListBox.Items.Clear();
             if ((string)Translated_Language_ComboBox.SelectedItem != "None")
             {
@@ -60,7 +72,47 @@ namespace Nyelvtanulas.Views
 
         private void Translated_Language_ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ClearTranslationStuff();
+            Translation_Language_ComboBox.Items.Clear();
+            Translation_Language_ComboBox.Items.Add("None");
+            Translation_Language_ComboBox.Visible = false;
+            Choose_Translation_Label.Visible = false;
+            if (Translated_Language_ListBox.SelectedItem != null)
+            {
+                Translation_Language_ComboBox.Items.AddRange(Data.GetTranslationLanguages((string)Translated_Language_ComboBox.SelectedItem, (string)Translated_Language_ListBox.SelectedItem));
+                Translation_Language_ComboBox.Visible = true;
+                Choose_Translation_Label.Visible = true;
+            }
+        }
 
+        private void Translation_Language_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((string)Translation_Language_ComboBox.SelectedItem == "None")
+            {
+                Translation_Language_ListBox.Items.Clear();
+                Translation_Language_ListBox.Visible = false;
+            }
+            else
+            {
+                Translation_Language_ListBox.Items.AddRange(Data.GetWords((string)Translated_Language_ComboBox.SelectedItem, (string)Translated_Language_ListBox.SelectedItem,(string)Translation_Language_ComboBox.SelectedItem));
+                Translation_Language_ListBox.Visible = true;
+            }
+        }
+        private void ClearTranslationStuff()
+        {
+            Translation_Language_ComboBox.Items.Clear();
+            Translation_Language_ComboBox.Items.Add("None");
+            Translation_Language_ComboBox.SelectedIndex = 0;
+            Translation_Language_ListBox.Items.Clear();
+        }
+
+        private void CheckWords_View_Resize(object sender, EventArgs e)
+        {
+            foreach (Control control in Controls)
+            {
+                control.Location = new Point(Size.Width * ControlPercentages[control].X / 100, Size.Height * ControlPercentages[control].Y / 100);
+                control.Size = new Size(Size.Width * ControlPercentages[control].Width / 100, Size.Height * ControlPercentages[control].Height / 100);
+            }
         }
     }
 }

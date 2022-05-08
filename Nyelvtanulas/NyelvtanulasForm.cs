@@ -55,8 +55,14 @@ namespace Nyelvtanulas
         {
             control.Dock = System.Windows.Forms.DockStyle.Fill;
             control.Location = new System.Drawing.Point(0, 0);
+            control.Size = Size;
             control.TabIndex = 0;
             this.CurrentView = control;
+        }
+
+        private void NyelvtanulasForm_Resize(object sender, EventArgs e)
+        {
+            Controls[0].Size = Size;
         }
     }
 }

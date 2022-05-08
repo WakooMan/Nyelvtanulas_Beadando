@@ -34,11 +34,13 @@ namespace Nyelvtanulas
             // 
             // NyelvtanulasForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 334);
+            this.ClientSize = new System.Drawing.Size(1699, 609);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "NyelvtanulasForm";
             this.Text = "Nyelvtanulás";
+            this.Resize += new System.EventHandler(this.NyelvtanulasForm_Resize);
             this.ResumeLayout(false);
 
         }

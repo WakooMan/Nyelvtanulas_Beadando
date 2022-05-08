@@ -21,6 +21,9 @@ namespace Nyelvtanulas.Languages
 
         public IEnumerable<Word> Translations(Language lang) => _translations[lang].AsEnumerable();
         public Language Language => _language;
+
+        public string[] TranslationLanguages => _translations.Keys.Select(l => l.Name()).ToArray();
+
         public bool TryAddTranslation(Word Translation)
         {
             Language lang = Translation.Language;

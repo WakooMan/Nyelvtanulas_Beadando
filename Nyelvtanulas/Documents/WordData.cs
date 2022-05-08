@@ -71,6 +71,16 @@ namespace Nyelvtanulas.Documents
             word.TryAddTranslation(translation);
         }
 
+        public string[] GetTranslationLanguages(string Translated_Language, string Word)
+        {
+            return Languages[Translated_Language].GetWord(Word)?.TranslationLanguages;
+        }
+
+        public string[] GetWords(string Translated_Language, string Translated_Language_Word, string Translation_Language)
+        {
+            return Languages[Translated_Language].GetWord(Translated_Language_Word)?.Translations(Languages[Translation_Language]).Select(w => w.Text).ToArray();
+        }
+
         private void LoadFromDataBase()
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))

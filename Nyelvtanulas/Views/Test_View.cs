@@ -20,6 +20,8 @@ namespace Nyelvtanulas.Views
         private readonly InitialView View;
         private readonly TestResults Results;
         private Action<UserControl> SetCurrentView { get; set; }
+        private readonly Dictionary<Control, Rectangle> ControlPercentages;
+
         public Test_View(InitialView View, TestResults Results,Action<UserControl> SetCurrentView, Test test)
         {
             Test = test;
@@ -29,6 +31,11 @@ namespace Nyelvtanulas.Views
             LanguageObjects = new();
             InitializeComponent();
             AddTestObjects();
+            ControlPercentages = new Dictionary<Control, Rectangle>();
+            foreach (Control control in Controls)
+            {
+                ControlPercentages.Add(control, new Rectangle(new Point((int)((double)control.Location.X / Size.Width * 100), (int)((double)control.Location.Y / Size.Height * 100)), new Size((int)((double)control.Size.Width / Size.Width * 100), (int)((double)control.Size.Height / Size.Height * 100))));
+            }
             Translated_Language1_Label.Text = Test.First_Language;
             Translation_Language1_Label.Text = Test.First_Language;
             Translated_Language2_Label.Text = Test.Second_Language;
@@ -67,6 +74,8 @@ namespace Nyelvtanulas.Views
             WordLabel.Size = new System.Drawing.Size(66, 25);
             WordLabel.TabIndex = (((i-1)*5 + j-1)*3)+1 + 3;
             WordLabel.Text = Word;
+            WordLabel.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+            WordLabel.ForeColor = Color.White;
             this.Controls.Add(WordLabel);
 
             //SeparatorLabel Init
@@ -77,6 +86,8 @@ namespace Nyelvtanulas.Views
             SeparatorLabel.Size = new System.Drawing.Size(19, 25);
             SeparatorLabel.TabIndex = (((i - 1) * 5 + j - 1) * 3) + 2 +3;
             SeparatorLabel.Text = "-";
+            SeparatorLabel.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+            SeparatorLabel.ForeColor = Color.White;
             this.Controls.Add(SeparatorLabel);
 
             //TextBox Init
@@ -85,6 +96,9 @@ namespace Nyelvtanulas.Views
             TextBox.Name = $"Language{i}_Word{j}_TextBox";
             TextBox.Size = new System.Drawing.Size(143, 31);
             TextBox.TabIndex = (((i - 1) * 5 + j - 1) * 3) + 3 +3;
+            TextBox.BackColor = Color.Yellow;
+            TextBox.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+            TextBox.ForeColor = Color.Green;
             this.Controls.Add(TextBox);
 
             //TickLabel Init
@@ -96,6 +110,7 @@ namespace Nyelvtanulas.Views
             TickLabel.TabIndex = (((i - 1) * 5 + j - 1) * 3) + 4 + 3;
             TickLabel.Text = "\u221A";
             TickLabel.Visible = false;
+            TickLabel.Font = new Font(Label.DefaultFont, FontStyle.Bold);
             TickLabel.ForeColor = Color.Green;
             this.Controls.Add(TickLabel);
 
@@ -108,6 +123,7 @@ namespace Nyelvtanulas.Views
             CrossLabel.TabIndex = (((i - 1) * 5 + j - 1) * 5) + 5 + 3;
             CrossLabel.Text = "X";
             CrossLabel.Visible = false;
+            CrossLabel.Font = new Font(Label.DefaultFont, FontStyle.Bold);
             CrossLabel.ForeColor = Color.Red;
             this.Controls.Add(CrossLabel);
 
@@ -124,7 +140,7 @@ namespace Nyelvtanulas.Views
                 good = (result) ? good + 1 : good;
                 LanguageObjects[i].SetVisible(result);
             }
-            Results.Add(new TestResult(DateTime.Now, (int)(((double)good) / max * 100)));
+            Results.Add(new TestResult(DateTime.Now, (int)(((double)good) / max * 100),Test.First_Language,Test.Second_Language));
             Test_Knowledge_Button.Visible = false;
             Exit_Button.Visible = true;
         }
@@ -132,6 +148,15 @@ namespace Nyelvtanulas.Views
         private void Exit_Button_Click(object sender, EventArgs e)
         {
             SetCurrentView(View);
+        }
+
+        private void Test_View_Resize(object sender, EventArgs e)
+        {
+            foreach (Control control in Controls)
+            {
+                control.Location = new Point(Size.Width * ControlPercentages[control].X / 100, Size.Height * ControlPercentages[control].Y / 100);
+                control.Size = new Size(Size.Width * ControlPercentages[control].Width / 100, Size.Height * ControlPercentages[control].Height / 100);
+            }
         }
     }
 
@@ -166,6 +191,7 @@ namespace Nyelvtanulas.Views
                 crossLabel.Visible = true;
                 tickLabel.Visible = false;
             }
+            translation.Enabled = false;
         }
     }
 }

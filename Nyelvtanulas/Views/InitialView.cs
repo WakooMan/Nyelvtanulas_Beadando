@@ -17,14 +17,24 @@ namespace Nyelvtanulas.Views
     {
         private readonly WordData Data;
         private readonly TestResults Results;
-        private string[] PreviousValues;
+        private readonly List<string> PreviousValues;
+        private readonly Dictionary<Control, Rectangle> ControlPercentages;
+        private DateTime Date1;
+        private DateTime Date2;
+        private bool IsClearing = false;
+
         public InitialView(WordData Data,TestResults Results,Action<UserControl> setCurrentView)
         {
             SetCurrentView = setCurrentView;
             this.Data = Data;
             this.Results = Results;
             InitializeComponent();
-            PreviousValues = new string[6];
+            ControlPercentages = new Dictionary<Control, Rectangle>();
+            foreach (Control control in Controls)
+            {
+                ControlPercentages.Add(control,new Rectangle(new Point((int)((double)control.Location.X/Size.Width*100), (int)((double)control.Location.Y / Size.Height*100)),new Size((int)((double)control.Size.Width / Size.Width*100), (int)((double)control.Size.Height / Size.Height*100))));
+            }
+            PreviousValues = new List<string>();
             foreach (string lg in Data.LanguageNames)
             {
                 Add_Language1_ComboBox.Items.Add(lg);
@@ -33,6 +43,8 @@ namespace Nyelvtanulas.Views
                 Check_Language2_ComboBox.Items.Add(lg);
                 Export_Translated_Language_ComboBox.Items.Add(lg);
                 Export_Translation_Language_ComboBox.Items.Add(lg);
+                TestResults_Language1_ComboBox.Items.Add(lg);
+                TestResults_Language2_ComboBox.Items.Add(lg);
             }
             Add_Language1_ComboBox.SelectedIndex = 0;
             Add_Language2_ComboBox.SelectedIndex = 0;
@@ -40,147 +52,187 @@ namespace Nyelvtanulas.Views
             Check_Language2_ComboBox.SelectedIndex = 0;
             Export_Translated_Language_ComboBox.SelectedIndex = 0;
             Export_Translation_Language_ComboBox.SelectedIndex = 0;
+            TestResults_Language1_ComboBox.SelectedIndex = 0;
+            TestResults_Language2_ComboBox.SelectedIndex = 0;
+            SetComboBoxLanguageLogic(Add_Language1_ComboBox, Add_Language2_ComboBox);
+            SetComboBoxLanguageLogic(Check_Language1_ComboBox, Check_Language2_ComboBox);
+            SetComboBoxLanguageLogic(Export_Translated_Language_ComboBox, Export_Translation_Language_ComboBox);
+            SetComboBoxLanguageLogic(TestResults_Language1_ComboBox, TestResults_Language2_ComboBox);
+            Date1 = TestResults_DateTimePicker1.Value;
+            Date2 = TestResults_DateTimePicker2.Value;
+            Add_Language1_Label.Parent = Add_Translation_PictureBox;
+            Add_Language2_Label.Parent = Add_Translation_PictureBox;
+            Check_Language1_Label.Parent =Test_Knowledge_PictureBox;
+            Check_Language2_Label.Parent = Test_Knowledge_PictureBox;
+
         }
 
         private Action<UserControl> SetCurrentView { get; set; }
 
         private void Add_Translation_Button_Click(object sender, EventArgs e)
         {
-            if (Add_Language1_ComboBox.Text != "None" && Add_Language2_ComboBox.Text != "None")
+            CheckComboBoxes(Add_Language1_ComboBox, Add_Language2_ComboBox, Add_Language1_Label, Add_Language2_Label, () =>
             {
-                SetCurrentView(new Add_Word_View(this,Data, this.SetCurrentView, this.Add_Language1_ComboBox.Text, this.Add_Language2_ComboBox.Text));
+                SetCurrentView(new Add_Word_View(this, Data, this.SetCurrentView, this.Add_Language1_ComboBox.Text, this.Add_Language2_ComboBox.Text));
+                ClearControls();
+            });
+        }
+
+        private void CheckComboBoxes(ComboBox cb1, ComboBox cb2,Label lb1,Label lb2,Action action)
+        {
+            if (cb1.Text != "None" && cb2.Text != "None")
+            {
+                action();
                 return;
             }
             string message = "";
-            if(Add_Language1_ComboBox.Text == "None")
+            if (cb1.Text == "None")
             {
-                message += "Translated Language can't be None!\n";
+                message += $"{lb1.Text} can't be None!\n";
             }
-            if(Add_Language2_ComboBox.Text == "None")
+            if (cb2.Text == "None")
             {
-                message += "Translation Language can't be None!";
+                message += $"{lb2.Text} can't be None!";
             }
             MessageBox.Show(message);
-        }
-
-        private void Add_Language1_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (PreviousValues[0] is not null && PreviousValues[0]!= "None")
-            {
-                Add_Language2_ComboBox.Items.Add(PreviousValues[0]);
-            }
-            if ((string)Add_Language1_ComboBox.SelectedItem != "None") 
-            {
-                Add_Language2_ComboBox.Items.Remove(Add_Language1_ComboBox.SelectedItem); 
-            }
-            PreviousValues[0] = (string)Add_Language1_ComboBox.SelectedItem;
-        }
-
-        private void Add_Language2_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (PreviousValues[1] is not null && PreviousValues[1] != "None")
-            {
-                Add_Language1_ComboBox.Items.Add(PreviousValues[1]);
-            }
-            if ((string)Add_Language2_ComboBox.SelectedItem != "None")
-            {
-                Add_Language1_ComboBox.Items.Remove(Add_Language2_ComboBox.SelectedItem);
-            }
-            PreviousValues[1] = (string)Add_Language2_ComboBox.SelectedItem;
-        }
-
-        private void Check_Language1_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (PreviousValues[2] is not null && PreviousValues[2] != "None")
-            {
-                Check_Language2_ComboBox.Items.Add(PreviousValues[2]);
-            }
-            if ((string)Check_Language1_ComboBox.SelectedItem != "None")
-            {
-                Check_Language2_ComboBox.Items.Remove(Check_Language1_ComboBox.SelectedItem);
-            }
-            PreviousValues[2] = (string)Check_Language1_ComboBox.SelectedItem;
-        }
-
-        private void Check_Language2_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (PreviousValues[3] is not null && PreviousValues[3] != "None")
-            {
-                Check_Language1_ComboBox.Items.Add(PreviousValues[3]);
-            }
-            if ((string)Check_Language2_ComboBox.SelectedItem != "None")
-            {
-                Check_Language1_ComboBox.Items.Remove(Check_Language2_ComboBox.SelectedItem);
-            }
-            PreviousValues[3] = (string)Check_Language2_ComboBox.SelectedItem;
         }
 
         private void Check_Knowledge_Button_Click(object sender, EventArgs e)
         {
-            if (Check_Language1_ComboBox.Text != "None" && Check_Language2_ComboBox.Text != "None")
+            CheckComboBoxes(Check_Language1_ComboBox, Check_Language2_ComboBox, Check_Language1_Label, Check_Language2_Label, () => 
             {
                 try
-                { 
-                    SetCurrentView(new Test_View(this,Results,SetCurrentView, Data.CreateTest(Check_Language1_ComboBox.Text, Check_Language2_ComboBox.Text)));
-                    return;
+                {
+                    SetCurrentView(new Test_View(this, Results, SetCurrentView, Data.CreateTest(Check_Language1_ComboBox.Text, Check_Language2_ComboBox.Text)));
+                    ClearControls();
                 }
-                catch(NotEnoughWordException ex)
+                catch (NotEnoughWordException ex)
                 {
                     MessageBox.Show(ex.Message);
-                    return;
                 }
-            }
-            string message = "";
-            if (Check_Language1_ComboBox.Text == "None")
-            {
-                message += "First Language can't be None!\n";
-            }
-            if (Check_Language2_ComboBox.Text == "None")
-            {
-                message += "Second Language can't be None!";
-            }
-            MessageBox.Show(message);
+            });
         }
 
         private void Export_To_Xml_Button_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog Dialog = new FolderBrowserDialog();
-            if (Dialog.ShowDialog() == DialogResult.OK)
+            CheckComboBoxes(Export_Translated_Language_ComboBox, Export_Translation_Language_ComboBox, Export_Translated_Language_Label, Export_Translation_Language_Label, () =>
             {
-                Data.ExportToXml(Export_Translated_Language_ComboBox.Text,Export_Translation_Language_ComboBox.Text,Dialog.SelectedPath+Export_FileName_TextBox.Text);
-                MessageBox.Show("Words exported to XML file successfully.");
-            }
+                FolderBrowserDialog Dialog = new FolderBrowserDialog();
+                if (Dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Data.ExportToXml(Export_Translated_Language_ComboBox.Text, Export_Translation_Language_ComboBox.Text, Dialog.SelectedPath + Export_FileName_TextBox.Text);
+                    MessageBox.Show("Words exported to XML file successfully.");
+                    ClearControls();
+                }
+            });
         }
 
-        private void Export_Translated_Language_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void LanguageComboBoxChangedEvent(int i,ComboBox cb1,ComboBox cb2)
         {
-            if (PreviousValues[4] is not null && PreviousValues[4] != "None")
+            if (PreviousValues[i] is not null && PreviousValues[i] != "None")
             {
-                Export_Translation_Language_ComboBox.Items.Add(PreviousValues[4]);
+                cb2.Items.Add(PreviousValues[i]);
             }
-            if ((string)Add_Language2_ComboBox.SelectedItem != "None")
+            if ((string)cb1.SelectedItem != "None")
             {
-                Export_Translation_Language_ComboBox.Items.Remove(Export_Translated_Language_ComboBox.SelectedItem);
+                cb2.Items.Remove(cb1.SelectedItem);
             }
-            PreviousValues[4] = (string)Export_Translated_Language_ComboBox.SelectedItem;
+            PreviousValues[i] = (string)cb1.SelectedItem;
         }
 
-        private void Export_Translation_Language_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetComboBoxLanguageLogic(ComboBox cb1,ComboBox cb2)
         {
-            if (PreviousValues[5] is not null && PreviousValues[5] != "None")
+            PreviousValues.Add("None");
+            int i = PreviousValues.Count - 1;
+            cb1.SelectedIndexChanged += (sender, e) => 
             {
-                Export_Translated_Language_ComboBox.Items.Add(PreviousValues[5]);
-            }
-            if ((string)Add_Language2_ComboBox.SelectedItem != "None")
+                LanguageComboBoxChangedEvent(i, cb1, cb2);
+            };
+            PreviousValues.Add("None");
+            int j = PreviousValues.Count - 1;
+            cb2.SelectedIndexChanged += (sender, e) =>
             {
-                Export_Translated_Language_ComboBox.Items.Remove(Export_Translation_Language_ComboBox.SelectedItem);
-            }
-            PreviousValues[5] = (string)Export_Translation_Language_ComboBox.SelectedItem;
+                LanguageComboBoxChangedEvent(j, cb2, cb1);
+            };
         }
 
         private void Check_Word_Button_Click(object sender, EventArgs e)
         {
             SetCurrentView(new CheckWords_View(this,Data,SetCurrentView));
+            ClearControls();
+        }
+
+        private void Test_Results_Button_Click(object sender, EventArgs e)
+        {
+            CheckComboBoxes(TestResults_Language1_ComboBox, TestResults_Language2_ComboBox, TestResults_Language1_Label, TestResults_Language2_Label, () =>
+            {
+                SetCurrentView(new TestResults_View(this, Results, SetCurrentView, TestResults_DateTimePicker1.Value, TestResults_DateTimePicker2.Value, TestResults_Language1_ComboBox.Text, TestResults_Language2_ComboBox.Text));
+                ClearControls();
+            });
+        }
+
+        private void ClearControls()
+        {
+            IsClearing = true;
+            DateTime temp = DateTime.Now;
+            foreach (Control control in Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.Text = "";
+                }
+                if (control is ComboBox)
+                {
+                    ((ComboBox)control).SelectedIndex = 0;
+                }
+                if (control is DateTimePicker)
+                {
+                    if (((DateTimePicker)control).Value == Date1)
+                    {
+                        ((DateTimePicker)control).Value = temp;
+                    }
+                    else
+                    {
+                        ((DateTimePicker)control).Value = temp;
+                    }
+                }
+            }
+            IsClearing = false;
+        }
+
+        private void InitialView_Resize(object sender, EventArgs e)
+        {
+            foreach (Control control in Controls)
+            {
+                control.Location = new Point(Size.Width * ControlPercentages[control].X/100,Size.Height * ControlPercentages[control].Y/100);
+                control.Size = new Size(Size.Width * ControlPercentages[control].Width/100, Size.Height * ControlPercentages[control].Height/100);
+            }
+        }
+
+        private void TestResults_DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            if (TestResults_DateTimePicker1.Value <= TestResults_DateTimePicker2.Value || IsClearing)
+            {
+                Date1 = TestResults_DateTimePicker1.Value;
+            }
+            else
+            {
+                MessageBox.Show("First date should be before the second date!");
+                TestResults_DateTimePicker1.Value = Date1;
+            }
+        }
+
+        private void TestResults_DateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            if (TestResults_DateTimePicker2.Value >= TestResults_DateTimePicker1.Value || IsClearing)
+            {
+                Date2 = TestResults_DateTimePicker2.Value;
+            }
+            else
+            {
+                MessageBox.Show("Second date should be after the first date!");
+                TestResults_DateTimePicker2.Value = Date2;
+            }
         }
     }
 }

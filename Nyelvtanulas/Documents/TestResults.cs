@@ -27,7 +27,7 @@ namespace Nyelvtanulas.Documents
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    _results.Add(new TestResult(reader.GetDateTime(1), reader.GetInt32(2)));
+                    _results.Add(new TestResult(reader.GetDateTime(1), reader.GetInt32(2),reader.GetString(3),reader.GetString(4)));
                 }
             }
         }
@@ -43,8 +43,8 @@ namespace Nyelvtanulas.Documents
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("INSERT INTO Results(Id,Date,Percentage) VALUES (@ID,@Date,@Percentage);", connection);
-                SqlParameter[] parameters = new SqlParameter[] { new SqlParameter("@ID",_results.Count),new SqlParameter("@Date",Result.Date), new SqlParameter("@Percentage",Result.Percentage)};
+                SqlCommand command = new SqlCommand("INSERT INTO Results(Id,Date,Percentage,Language1,Language2) VALUES (@ID,@Date,@Percentage,@Language1,@Language2);", connection);
+                SqlParameter[] parameters = new SqlParameter[] { new SqlParameter("@ID",_results.Count),new SqlParameter("@Date",Result.Date), new SqlParameter("@Percentage",Result.Percentage),new SqlParameter("@Language1",Result.FirstLanguage), new SqlParameter("@Language2", Result.SecondLanguage) };
                 parameters.ToList().ForEach(par => command.Parameters.Add(par));                
                 command.ExecuteNonQuery();
             }

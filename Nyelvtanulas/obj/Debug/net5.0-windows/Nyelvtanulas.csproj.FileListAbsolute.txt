@@ -56,3 +56,5 @@ D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.Tes
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.csproj.CopyComplete
 D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.CheckWords_View.resources
 D:\Repos\C#Beadando\Nyelvtanulas\bin\Debug\net5.0-windows\System.Windows.Forms.DataVisualization.dll
+D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Views.TestResults_View.resources
+D:\Repos\C#Beadando\Nyelvtanulas\obj\Debug\net5.0-windows\Nyelvtanulas.Properties.Resources.resources
